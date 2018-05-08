@@ -6,14 +6,21 @@ using System;
 
 public class AudioMover2 : MonoBehaviour
 {
-    private const float MID_PITCH = 6.8f;
-    private const float speed = 10f;
+    private float midPitch = 6.8f;
+    private float speed = 10f;
     private Rigidbody2D rb;
 
     private void Awake()
     {
         EventManager.AddListener(EventType.MicrophonePitch, OnMicrophonePitch);
+        EventManager.AddListener(EventType.NewPitchBounds, OnNewPitchBounds);
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void OnNewPitchBounds(object pitchBoundsObj)
+    {
+        float[] pitchBounds = (float[])pitchBoundsObj;
+        midPitch = (pitchBounds[0] + pitchBounds[1]) / 2;
     }
 
     private void OnMicrophonePitch(object pitchObj)
@@ -22,7 +29,7 @@ public class AudioMover2 : MonoBehaviour
 
         if (pitch.HasValue)
         {
-            Vector2 force = new Vector2(0, (pitch.Value - MID_PITCH) * speed);
+            Vector2 force = new Vector2(0, (pitch.Value - midPitch) * speed);
             rb.AddForce(force);
         }
     }

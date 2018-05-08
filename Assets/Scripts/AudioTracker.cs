@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pitch;
 using System.Threading.Tasks;
+using System;
 
 public class AudioTracker : MonoBehaviour
 {
@@ -11,13 +12,15 @@ public class AudioTracker : MonoBehaviour
     private PitchTracker pitchTracker;
     private float? currentPitch = null;
     private int numPitchSamples = 0;
-    private bool isTrackingAudio = true;
+    private bool isTrackingAudio = false;
 
-    private const string DEVICE_NAME = null;
+    private string DEVICE_NAME;
     private const int RECORD_FREQUENCY = 44100;
 
     private void Start()
     {
+        DEVICE_NAME = Microphone.devices[0];
+
         pitchTracker = new PitchTracker
         {
             SampleRate = RECORD_FREQUENCY,
@@ -25,7 +28,13 @@ public class AudioTracker : MonoBehaviour
             RecordPitchRecords = false,
         };
         pitchTracker.PitchDetected += PitchDetected;
-        micRecording = Microphone.Start(null, true, 100, RECORD_FREQUENCY);
+        StartRecording();
+    }
+
+    private void StartRecording()
+    {
+        micRecording = Microphone.Start(DEVICE_NAME, true, 100, RECORD_FREQUENCY);
+        isTrackingAudio = true;
     }
 
     private void FixedUpdate()

@@ -4,7 +4,8 @@ using UnityEngine.Events;
 public enum EventType
 {
     MicrophoneVolume,
-    MicrophonePitch
+    MicrophonePitch,
+    NewPitchBounds
 }
 
 [System.Serializable]
