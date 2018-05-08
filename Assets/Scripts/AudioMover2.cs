@@ -6,8 +6,8 @@ using System;
 
 public class AudioMover2 : MonoBehaviour
 {
-    private const float MID_PITCH = 6f;
-
+    private const float MID_PITCH = 6.8f;
+    private const float speed = 10f;
     private Rigidbody2D rb;
 
     private void Awake()
