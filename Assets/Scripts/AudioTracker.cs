@@ -11,7 +11,7 @@ public class AudioTracker : MonoBehaviour
     private PitchTracker pitchTracker;
     private float? currentPitch = null;
     private int numPitchSamples = 0;
-    private bool isTrackingAudio = false;
+    private bool isTrackingAudio = true;
 
     private const string DEVICE_NAME = null;
     private const int RECORD_FREQUENCY = 44100;
@@ -26,28 +26,22 @@ public class AudioTracker : MonoBehaviour
         };
         pitchTracker.PitchDetected += PitchDetected;
         micRecording = Microphone.Start(null, true, 100, RECORD_FREQUENCY);
-        TrackAudio();
     }
 
-    private async Task TrackAudio()
+    private void FixedUpdate()
     {
-        isTrackingAudio = true;
-        while (isTrackingAudio)
+        if (isTrackingAudio)
         {
-            await Wait.ForIEnumerator(new WaitForSeconds(0.1f));
             float[] samples = GetSamples();
 
             if (samples == null)
             {
-                continue;
+                return;
             }
-
             float rmsVolume = CalculateRmsVolume(samples);
             float? logPitch = CalculateLogPitch(samples);
-
             EventManager.TriggerEvent(EventType.MicrophoneVolume, rmsVolume);
             EventManager.TriggerEvent(EventType.MicrophonePitch, logPitch);
-            Debug.Log("Tracking audio");
         }
     }
 
@@ -107,7 +101,8 @@ public class AudioTracker : MonoBehaviour
         if (currentPitch.HasValue)
         {
             return currentPitch.Value / numPitchSamples;
-        } else
+        }
+        else
         {
             return null;
         }

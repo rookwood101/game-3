@@ -6,7 +6,6 @@ using System;
 
 public class AudioMover2 : MonoBehaviour
 {
-    private float speed = 10;
     private const float MID_PITCH = 6f;
 
     private Rigidbody2D rb;
@@ -14,6 +13,7 @@ public class AudioMover2 : MonoBehaviour
     private void Awake()
     {
         EventManager.AddListener(EventType.MicrophonePitch, OnMicrophonePitch);
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void OnMicrophonePitch(object pitchObj)
@@ -22,8 +22,8 @@ public class AudioMover2 : MonoBehaviour
 
         if (pitch.HasValue)
         {
-            Debug.Log("adding force");
-            rb.AddForce(new Vector2(0, (pitch.Value - MID_PITCH) * speed));
+            Vector2 force = new Vector2(0, (pitch.Value - MID_PITCH) * speed);
+            rb.AddForce(force);
         }
     }
 }
