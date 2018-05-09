@@ -12,8 +12,8 @@ public class AudioMover2 : MonoBehaviour
 
     private void Awake()
     {
-        EventManager.AddListener(EventType.MicrophonePitch, OnMicrophonePitch);
-        EventManager.AddListener(EventType.NewPitchBounds, OnNewPitchBounds);
+        EventManager.AddListener(EventTypes.MicrophonePitch, OnMicrophonePitch);
+        EventManager.AddListener(EventTypes.NewPitchBounds, OnNewPitchBounds);
         rb = GetComponent<Rigidbody2D>();
     }
 

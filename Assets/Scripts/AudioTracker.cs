@@ -49,8 +49,8 @@ public class AudioTracker : MonoBehaviour
             }
             float rmsVolume = CalculateRmsVolume(samples);
             float? logPitch = CalculateLogPitch(samples);
-            EventManager.TriggerEvent(EventType.MicrophoneVolume, rmsVolume);
-            EventManager.TriggerEvent(EventType.MicrophonePitch, logPitch);
+            EventManager.TriggerEvent(EventTypes.MicrophoneVolume, rmsVolume);
+            EventManager.TriggerEvent(EventTypes.MicrophonePitch, logPitch);
         }
     }
 

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-public enum EventType
+public enum EventTypes
 {
     MicrophoneVolume,
     MicrophonePitch,

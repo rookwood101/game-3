@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 public class EventManager : MonoBehaviour
 {
-    private Dictionary<EventType, UnityEventWithObject> eventDictionary;
-    private Dictionary<EventType, TaskCompletionSource<object>> eventCompleteAwaiters;
+    private Dictionary<EventTypes, UnityEventWithObject> eventDictionary;
+    private Dictionary<EventTypes, TaskCompletionSource<object>> eventCompleteAwaiters;
 
     private static EventManager eventManager;
 
@@ -37,12 +37,12 @@ public class EventManager : MonoBehaviour
     {
         if (eventDictionary == null)
         {
-            eventDictionary = new Dictionary<EventType, UnityEventWithObject>();
-            eventCompleteAwaiters = new Dictionary<EventType, TaskCompletionSource<object>>();
+            eventDictionary = new Dictionary<EventTypes, UnityEventWithObject>();
+            eventCompleteAwaiters = new Dictionary<EventTypes, TaskCompletionSource<object>>();
         }
     }
 
-    public static void AddListener(EventType eventName, UnityAction<object> listener)
+    public static void AddListener(EventTypes eventName, UnityAction<object> listener)
     {
         UnityEventWithObject thisEvent = null;
         if (Instance.eventDictionary.TryGetValue(eventName, out thisEvent))
@@ -57,7 +57,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public static void RemoveListener(EventType eventName, UnityAction<object> listener)
+    public static void RemoveListener(EventTypes eventName, UnityAction<object> listener)
     {
         if (eventManager == null) return;
         UnityEventWithObject thisEvent = null;
@@ -67,7 +67,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public static void TriggerEvent(EventType eventName, object parameter)
+    public static void TriggerEvent(EventTypes eventName, object parameter)
     {
         UnityEventWithObject thisEvent = null;
         if (Instance.eventDictionary.TryGetValue(eventName, out thisEvent))
@@ -82,7 +82,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public static async Task<object> WaitForEvent(EventType eventName)
+    public static async Task<object> WaitForEvent(EventTypes eventName)
     {
         TaskCompletionSource<object> taskCompletion;
         if (!Instance.eventCompleteAwaiters.TryGetValue(eventName, out taskCompletion))
@@ -94,7 +94,7 @@ public class EventManager : MonoBehaviour
         return await taskCompletion.Task;
     }
 
-    public static async Task<T> WaitForEventUntil<T>(EventType eventName, T value) where T : class
+    public static async Task<T> WaitForEventUntil<T>(EventTypes eventName, T value) where T : class
     {
         T eventValue;
         do

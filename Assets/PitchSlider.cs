@@ -23,7 +23,7 @@ public class PitchSlider : MonoBehaviour {
         setMax = GameObject.Find("Set Max").GetComponent<Button>();
         setMax.onClick.AddListener(new UnityAction(OnSetMax));
         sliderColorBlock = slider.colors;
-        EventManager.AddListener(EventType.MicrophonePitch, OnPitchChange);
+        EventManager.AddListener(EventTypes.MicrophonePitch, OnPitchChange);
     }
 
     private void OnPitchChange(object pitchObj)
@@ -46,11 +46,11 @@ public class PitchSlider : MonoBehaviour {
     private void OnSetMin()
     {
         slider.minValue = slider.value;
-        EventManager.TriggerEvent(EventType.NewPitchBounds, new float[] { slider.minValue, slider.maxValue });
+        EventManager.TriggerEvent(EventTypes.NewPitchBounds, new float[] { slider.minValue, slider.maxValue });
     }
     private void OnSetMax()
     {
         slider.maxValue = slider.value;
-        EventManager.TriggerEvent(EventType.NewPitchBounds, new float[] { slider.minValue, slider.maxValue });
+        EventManager.TriggerEvent(EventTypes.NewPitchBounds, new float[] { slider.minValue, slider.maxValue });
     }
 }
