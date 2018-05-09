@@ -5,11 +5,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class PitchSlider : MonoBehaviour {
+public class PitchSlider : MonoBehaviour
+{
     private Slider slider;
     private Button setMin;
     private Button setMax;
-    private float lastPitch = 5;
 
     Color activeColor = new Color(255, 0, 0, 255);
     Color inActiveColor = new Color(255, 255, 255, 127);
@@ -29,13 +29,12 @@ public class PitchSlider : MonoBehaviour {
     private void OnPitchChange(object pitchObj)
     {
         float? pitch = (float?)pitchObj;
-        
+
         if (pitch.HasValue)
         {
             sliderColorBlock.disabledColor = activeColor;
             slider.colors = sliderColorBlock;
             slider.value = pitch.Value;
-            lastPitch = pitch.Value;
         }
         else
         {
