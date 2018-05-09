@@ -26,6 +26,11 @@ public class PitchSlider : MonoBehaviour
         EventManager.AddListener(EventTypes.MicrophonePitch, OnPitchChange);
     }
 
+    private void Start()
+    {
+        EventManager.TriggerEvent(EventTypes.NewPitchBounds, new float[] { slider.minValue, slider.maxValue });
+    }
+
     private void OnPitchChange(object pitchObj)
     {
         float? pitch = (float?)pitchObj;
