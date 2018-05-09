@@ -5,7 +5,9 @@ public enum EventTypes
 {
     MicrophoneVolume,
     MicrophonePitch,
-    NewPitchBounds
+    NewPitchBounds,
+    Runaway,
+    Investigate
 }
 
 [System.Serializable]
