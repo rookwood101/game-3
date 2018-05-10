@@ -10,16 +10,16 @@ public class Spookometer : MonoBehaviour
     float minPitch = 0;
     float maxPitch = 0;
     float _pitchSampleRange = 3; // in seconds
-    int pitchSampleCountBytes;
+    int pitchSampleCount;
     float compressionRatio = 0;
     private Text text;
 
-    List<byte> pitchSamples = new List<byte>();
+    List<float> pitchSamples = new List<float>();
 
     private void Awake()
     {
         text = GetComponent<Text>();
-        pitchSampleCountBytes = (int)(_pitchSampleRange / Time.fixedDeltaTime) * 4;
+        pitchSampleCount = (int)(_pitchSampleRange / Time.fixedDeltaTime);
         EventManager.AddListener(EventTypes.MicrophonePitch, OnMicrophonePitch);
         EventManager.AddListener(EventTypes.NewPitchBounds, OnNewPitchBounds);
     }
@@ -36,20 +36,24 @@ public class Spookometer : MonoBehaviour
         float? pitch = (float?)pitchObj;
         if (pitch.HasValue)
         {
-            pitchSamples.AddRange(BitConverter.GetBytes(pitch.Value));
+            float roundedPitch = (float)Math.Round(pitch.Value, 1, MidpointRounding.AwayFromZero);
+            pitchSamples.Add(roundedPitch);
         }
         else
         {
-            pitchSamples.AddRange(BitConverter.GetBytes(0f));
+            pitchSamples.Add(0f);
         }
 
-        if (pitchSamples.Count >= pitchSampleCountBytes)
+        if (pitchSamples.Count >= pitchSampleCount)
         {
-            byte[] pitchRecentSamples = new byte[pitchSampleCountBytes];
-            pitchSamples.CopyTo(pitchSamples.Count - pitchSampleCountBytes, pitchRecentSamples, 0, pitchSampleCountBytes);
-            byte[] compressedSamples = CLZF2.Compress(pitchRecentSamples);
-            compressionRatio = (float)compressedSamples.Length / (float)pitchSampleCountBytes;
+            byte[] pitchRecentSamplesBytes = new byte[pitchSampleCount * 4];
+            Buffer.BlockCopy(pitchSamples.ToArray(), pitchSamples.Count * 4 - pitchSampleCount * 4, pitchRecentSamplesBytes, 0, pitchRecentSamplesBytes.Length);
+
+            byte[] compressedSamples = CLZF2.Compress(pitchRecentSamplesBytes);
+            compressionRatio = (float)compressedSamples.Length / (float)pitchSampleCount;
             text.text = compressionRatio.ToString();
+
+            EventManager.TriggerEvent(EventTypes.Spookometer, compressionRatio);
         }
     }
 }
