@@ -92,9 +92,11 @@ namespace Pathfinding.RVO {
 				for (int i = 0; i < nodes.Length; i++) nds[i] = nodes[i];
 				nodes = nds;
 			}
-			nodes[filledNodes] = new Node();
-			nodes[filledNodes].child00 = filledNodes;
-			filledNodes++;
+            nodes[filledNodes] = new Node
+            {
+                child00 = filledNodes
+            };
+            filledNodes++;
 			return filledNodes-1;
 		}
 

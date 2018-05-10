@@ -782,10 +782,12 @@ namespace Pathfinding.RVO {
 
 			public Worker (Simulator sim) {
 				this.simulator = sim;
-				var thread = new Thread(new ThreadStart(Run));
-				thread.IsBackground = true;
-				thread.Name = "RVO Simulator Thread";
-				thread.Start();
+                var thread = new Thread(new ThreadStart(Run))
+                {
+                    IsBackground = true,
+                    Name = "RVO Simulator Thread"
+                };
+                thread.Start();
 			}
 
 			public void Execute (int task) {

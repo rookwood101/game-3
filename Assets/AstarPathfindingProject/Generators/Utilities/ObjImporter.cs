@@ -58,14 +58,15 @@ namespace Pathfinding {
 				i++;
 			}
 
-			Mesh mesh = new Mesh();
+            Mesh mesh = new Mesh
+            {
+                vertices = newVerts,
+                uv = newUVs,
+                normals = newNormals,
+                triangles = newMesh.triangles
+            };
 
-			mesh.vertices = newVerts;
-			mesh.uv = newUVs;
-			mesh.normals = newNormals;
-			mesh.triangles = newMesh.triangles;
-
-			mesh.RecalculateBounds();
+            mesh.RecalculateBounds();
 			//mesh.Optimize();
 
 			return mesh;
@@ -81,9 +82,11 @@ namespace Pathfinding {
 			int vt = 0;
 			int vn = 0;
 			int face = 0;
-			meshStruct mesh = new meshStruct();
-			mesh.fileName = filename;
-			StreamReader stream = File.OpenText(filename);
+            meshStruct mesh = new meshStruct
+            {
+                fileName = filename
+            };
+            StreamReader stream = File.OpenText(filename);
 			string entireText = stream.ReadToEnd();
 			stream.Dispose();
 			using (StringReader reader = new StringReader(entireText))

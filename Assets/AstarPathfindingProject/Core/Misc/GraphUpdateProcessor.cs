@@ -138,19 +138,23 @@ namespace Pathfinding {
 				foreach (IUpdatableGraph g in astar.data.GetUpdateableGraphs()) {
 					NavGraph gr = g as NavGraph;
 					if (ob.nnConstraint == null || ob.nnConstraint.SuitableGraph(astar.data.GetGraphIndex(gr), gr)) {
-						var guo = new GUOSingle();
-						guo.order = GraphUpdateOrder.GraphUpdate;
-						guo.obj = ob;
-						guo.graph = g;
-						graphUpdateQueueRegular.Enqueue(guo);
+                        var guo = new GUOSingle
+                        {
+                            order = GraphUpdateOrder.GraphUpdate,
+                            obj = ob,
+                            graph = g
+                        };
+                        graphUpdateQueueRegular.Enqueue(guo);
 					}
 				}
 			}
 
 			if (anyRequiresFloodFill) {
-				var guo = new GUOSingle();
-				guo.order = GraphUpdateOrder.FloodFill;
-				graphUpdateQueueRegular.Enqueue(guo);
+                var guo = new GUOSingle
+                {
+                    order = GraphUpdateOrder.FloodFill
+                };
+                graphUpdateQueueRegular.Enqueue(guo);
 			}
 
 			GraphModifier.TriggerEvent(GraphModifier.EventType.PreUpdate);

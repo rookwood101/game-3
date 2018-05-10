@@ -43,9 +43,11 @@ namespace Pathfinding {
 			// parts joined by links
 			for (int i = 0; i < nodes.Count; i++) {
 				if (nodes[i] is TriangleMeshNode || nodes[i] is GridNodeBase) {
-					var part = new PathPart();
-					part.startIndex = i;
-					uint currentGraphIndex = nodes[i].GraphIndex;
+                    var part = new PathPart
+                    {
+                        startIndex = i
+                    };
+                    uint currentGraphIndex = nodes[i].GraphIndex;
 
 					// Loop up until we find a node in another graph
 					// Ignore NodeLink3 nodes
@@ -75,9 +77,11 @@ namespace Pathfinding {
 
 					result.Add(part);
 				} else if (NodeLink2.GetNodeLink(nodes[i]) != null) {
-					var part = new PathPart();
-					part.startIndex = i;
-					var currentGraphIndex = nodes[i].GraphIndex;
+                    var part = new PathPart
+                    {
+                        startIndex = i
+                    };
+                    var currentGraphIndex = nodes[i].GraphIndex;
 
 					for (i++; i < nodes.Count; i++) {
 						if (nodes[i].GraphIndex != currentGraphIndex) {

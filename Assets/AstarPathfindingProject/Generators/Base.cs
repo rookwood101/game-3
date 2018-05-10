@@ -209,11 +209,12 @@ namespace Pathfinding {
 				}
 			});
 
-			var nnInfo = new NNInfoInternal(minNode);
+            var nnInfo = new NNInfoInternal(minNode)
+            {
+                constrainedNode = minConstNode
+            };
 
-			nnInfo.constrainedNode = minConstNode;
-
-			if (minConstNode != null) {
+            if (minConstNode != null) {
 				nnInfo.constClampedPosition = (Vector3)minConstNode.position;
 			} else if (minNode != null) {
 				nnInfo.constrainedNode = minNode;
@@ -583,10 +584,12 @@ namespace Pathfinding {
 		 */
 		public RaycastHit[] CheckHeightAll (Vector3 position) {
 			if (!heightCheck || use2D) {
-				var hit = new RaycastHit();
-				hit.point = position;
-				hit.distance = 0;
-				return new [] { hit };
+                var hit = new RaycastHit
+                {
+                    point = position,
+                    distance = 0
+                };
+                return new [] { hit };
 			}
 
 			if (thickRaycast) {

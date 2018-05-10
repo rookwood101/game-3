@@ -438,14 +438,16 @@ namespace Pathfinding.RVO.Sampled {
 			 * Note that the segment is directed, the agent will want to be on the left side of the segment.
 			 */
 			public static VO SegmentObstacle (Vector2 segmentStart, Vector2 segmentEnd, Vector2 offset, float radius, float inverseDt, float inverseDeltaTime) {
-				var vo = new VO();
+                var vo = new VO
+                {
 
-				// Adjusted so that a parameter weightFactor of 1 will be the default ("natural") weight factor
-				vo.weightFactor = 1;
-				// Just higher than anything else
-				vo.weightBonus = Mathf.Max(radius, 1)*40;
+                    // Adjusted so that a parameter weightFactor of 1 will be the default ("natural") weight factor
+                    weightFactor = 1,
+                    // Just higher than anything else
+                    weightBonus = Mathf.Max(radius, 1) * 40
+                };
 
-				var closestOnSegment = VectorMath.ClosestPointOnSegment(segmentStart, segmentEnd, Vector2.zero);
+                var closestOnSegment = VectorMath.ClosestPointOnSegment(segmentStart, segmentEnd, Vector2.zero);
 
 				// Collision?
 				if (closestOnSegment.magnitude <= radius) {

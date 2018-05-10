@@ -92,10 +92,12 @@ namespace Pathfinding {
 				// Start lots of threads
 				for (int i = 0; i < processors; i++) {
 					var pathHandler = pathHandlers[i];
-					threads[i] = new Thread(() => CalculatePathsThreaded(pathHandler));
-					threads[i].Name = "Pathfinding Thread " + i;
-					threads[i].IsBackground = true;
-					threads[i].Start();
+                    threads[i] = new Thread(() => CalculatePathsThreaded(pathHandler))
+                    {
+                        Name = "Pathfinding Thread " + i,
+                        IsBackground = true
+                    };
+                    threads[i].Start();
 				}
 			} else {
 				// Start coroutine if not using multithreading
