@@ -6,7 +6,7 @@ using UnityEngine;
 public class AmISpooked : MonoBehaviour
 {
     private float spookometer = 0;
-    private Vector3 ghostPosition = Vector2.zero;// inverse square law - spooked less if ghost further away
+    private GameObject ghost;// inverse square law - spooked less if ghost further away
     private float volume = 0;
     private const float QUIET_THRESHOLD = 0.25f;
     private const float LOUD_THRESHOLD = 0.75f;
@@ -23,19 +23,20 @@ public class AmISpooked : MonoBehaviour
 
     private void Awake()
     {
+        ghost = GameObject.Find("Ghost");
         EventManager.AddListener(EventTypes.Spookometer, OnSpookometerChange);
         EventManager.AddListener(EventTypes.MicrophoneVolume, OnMicrophoneVolumeChange);
     }
 
     private void Update()
     {
-        if (spookometer > 1 && (transform.position - ghostPosition).sqrMagnitude < 400)
+        if (spookometer > 1 && (transform.position - ghost.transform.position).magnitude < 5)
         {
             fear += (spookometer - 1) * Time.deltaTime;
         }
         if (fear > 6)
         {
-            EventManager.TriggerEvent(EventTypes.Runaway, gameObject.name);
+            EventManager.TriggerEvent(EventTypes.Runaway, gameObject);
         }
     }
 
