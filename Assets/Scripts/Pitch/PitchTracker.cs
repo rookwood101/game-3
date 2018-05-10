@@ -314,33 +314,41 @@ namespace Pitch
 
             m_dsp = new PitchDsp(m_sampleRate, kMinFreq, kMaxFreq, m_detectLevelThreshold);
 
-            m_iirFilterLoLo = new IIRFilter();
-            m_iirFilterLoLo.Proto = IIRFilter.ProtoType.Butterworth;
-            m_iirFilterLoLo.Type = IIRFilter.FilterType.HP;
-            m_iirFilterLoLo.Order = 5;
-            m_iirFilterLoLo.FreqLow = 45.0f;
-            m_iirFilterLoLo.SampleRate = (float)m_sampleRate;
+            m_iirFilterLoLo = new IIRFilter
+            {
+                Proto = IIRFilter.ProtoType.Butterworth,
+                Type = IIRFilter.FilterType.HP,
+                Order = 5,
+                FreqLow = 45.0f,
+                SampleRate = (float)m_sampleRate
+            };
 
-            m_iirFilterLoHi = new IIRFilter();
-            m_iirFilterLoHi.Proto = IIRFilter.ProtoType.Butterworth;
-            m_iirFilterLoHi.Type = IIRFilter.FilterType.LP;
-            m_iirFilterLoHi.Order = 5;
-            m_iirFilterLoHi.FreqHigh = 280.0f;
-            m_iirFilterLoHi.SampleRate = (float)m_sampleRate;
+            m_iirFilterLoHi = new IIRFilter
+            {
+                Proto = IIRFilter.ProtoType.Butterworth,
+                Type = IIRFilter.FilterType.LP,
+                Order = 5,
+                FreqHigh = 280.0f,
+                SampleRate = (float)m_sampleRate
+            };
 
-            m_iirFilterHiLo = new IIRFilter();
-            m_iirFilterHiLo.Proto = IIRFilter.ProtoType.Butterworth;
-            m_iirFilterHiLo.Type = IIRFilter.FilterType.HP;
-            m_iirFilterHiLo.Order = 5;
-            m_iirFilterHiLo.FreqLow = 45.0f;
-            m_iirFilterHiLo.SampleRate = (float)m_sampleRate;
+            m_iirFilterHiLo = new IIRFilter
+            {
+                Proto = IIRFilter.ProtoType.Butterworth,
+                Type = IIRFilter.FilterType.HP,
+                Order = 5,
+                FreqLow = 45.0f,
+                SampleRate = (float)m_sampleRate
+            };
 
-            m_iirFilterHiHi = new IIRFilter();
-            m_iirFilterHiHi.Proto = IIRFilter.ProtoType.Butterworth;
-            m_iirFilterHiHi.Type = IIRFilter.FilterType.LP;
-            m_iirFilterHiHi.Order = 5;
-            m_iirFilterHiHi.FreqHigh = 1500.0f;
-            m_iirFilterHiHi.SampleRate = (float)m_sampleRate;
+            m_iirFilterHiHi = new IIRFilter
+            {
+                Proto = IIRFilter.ProtoType.Butterworth,
+                Type = IIRFilter.FilterType.LP,
+                Order = 5,
+                FreqHigh = 1500.0f,
+                SampleRate = (float)m_sampleRate
+            };
 
             m_detectOverlapSamples = (int)(kDetectOverlapSec * m_sampleRate);
             m_maxOverlapDiff = kMaxOctaveSecRate * kDetectOverlapSec;
@@ -365,12 +373,13 @@ namespace Pitch
 
             PitchDsp.PitchToMidiNote(pitch, out midiNote, out midiCents);
 
-            var record = new PitchRecord();
-
-            record.RecordIndex = m_curPitchIndex;
-            record.Pitch = pitch;
-            record.MidiNote = midiNote;
-            record.MidiCents = midiCents;
+            var record = new PitchRecord
+            {
+                RecordIndex = m_curPitchIndex,
+                Pitch = pitch,
+                MidiNote = midiNote,
+                MidiCents = midiCents
+            };
 
             m_curPitchRecord = record;
 

@@ -163,19 +163,21 @@ namespace Pathfinding.Examples {
 			}
 
 			Vector3 RandomInside () {
-				Vector3 v = new Vector3();
-
-				v.x = (x + (float)rnd.NextDouble())*world.tileSize;
-				v.z = (z + (float)rnd.NextDouble())*world.tileSize;
-				return v;
+                Vector3 v = new Vector3
+                {
+                    x = (x + (float)rnd.NextDouble()) * world.tileSize,
+                    z = (z + (float)rnd.NextDouble()) * world.tileSize
+                };
+                return v;
 			}
 
 			Vector3 RandomInside (float px, float pz) {
-				Vector3 v = new Vector3();
-
-				v.x = (px + (float)rnd.NextDouble()/world.subTiles)*world.tileSize;
-				v.z = (pz + (float)rnd.NextDouble()/world.subTiles)*world.tileSize;
-				return v;
+                Vector3 v = new Vector3
+                {
+                    x = (px + (float)rnd.NextDouble() / world.subTiles) * world.tileSize,
+                    z = (pz + (float)rnd.NextDouble() / world.subTiles) * world.tileSize
+                };
+                return v;
 			}
 
 			Quaternion RandomYRot () {

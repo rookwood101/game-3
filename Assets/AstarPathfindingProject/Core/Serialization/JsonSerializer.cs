@@ -252,11 +252,13 @@ namespace Pathfinding.Serialization {
 #if NETFX_CORE
 			zip = new ZipFile(zipStream, System.IO.Compression.ZipArchiveMode.Create);
 #else
-			zip = new ZipFile();
-			zip.AlternateEncoding = System.Text.Encoding.UTF8;
-			zip.AlternateEncodingUsage = ZipOption.Always;
+            zip = new ZipFile
+            {
+                AlternateEncoding = System.Text.Encoding.UTF8,
+                AlternateEncodingUsage = ZipOption.Always
+            };
 #endif
-			meta = new GraphMeta();
+            meta = new GraphMeta();
 		}
 
 		public byte[] CloseSerialize () {

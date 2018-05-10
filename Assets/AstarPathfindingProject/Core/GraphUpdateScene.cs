@@ -232,9 +232,11 @@ namespace Pathfinding {
 
 					var mat = transform.localToWorldMatrix * Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(-90, 0, 0), Vector3.one);
 					var shape = new GraphUpdateShape(points, convex, mat, minBoundsHeight);
-					guo = new GraphUpdateObject(GetBounds());
-					guo.shape = shape;
-				} else {
+                    guo = new GraphUpdateObject(GetBounds())
+                    {
+                        shape = shape
+                    };
+                } else {
 					var bounds = GetBounds();
 					if (bounds.center == Vector3.zero && bounds.size == Vector3.zero) {
 						Debug.LogError("Cannot apply GraphUpdateScene, no points defined and no renderer or collider attached", this);
@@ -254,9 +256,11 @@ namespace Pathfinding {
 					shape = new GraphUpdateShape(points, convex, legacyMode && legacyUseWorldSpace ? Matrix4x4.identity : transform.localToWorldMatrix, minBoundsHeight);
 				}
 				var bounds = shape.GetBounds();
-				guo = new GraphUpdateObject(bounds);
-				guo.shape = shape;
-			}
+                guo = new GraphUpdateObject(bounds)
+                {
+                    shape = shape
+                };
+            }
 
 			firstApplied = true;
 
