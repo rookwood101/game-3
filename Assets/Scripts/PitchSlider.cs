@@ -10,6 +10,7 @@ public class PitchSlider : MonoBehaviour
     private Slider slider;
     private Button setMin;
     private Button setMax;
+    private Text valueText;
 
     Color activeColor = new Color(255, 0, 0, 255);
     Color inActiveColor = new Color(255, 255, 255, 127);
@@ -23,6 +24,7 @@ public class PitchSlider : MonoBehaviour
         setMax = GameObject.Find("Set Max").GetComponent<Button>();
         setMax.onClick.AddListener(new UnityAction(OnSetMax));
         sliderColorBlock = slider.colors;
+        valueText = GameObject.Find("Slider Value").GetComponent<Text>();
         EventManager.AddListener(EventTypes.MicrophonePitch, OnPitchChange);
     }
 
@@ -40,6 +42,8 @@ public class PitchSlider : MonoBehaviour
             sliderColorBlock.disabledColor = activeColor;
             slider.colors = sliderColorBlock;
             slider.value = pitch.Value;
+            float roundedPitch = (float)Math.Round(pitch.Value, 1, MidpointRounding.AwayFromZero);
+            valueText.text = roundedPitch.ToString();
         }
         else
         {

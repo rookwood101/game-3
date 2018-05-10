@@ -7,7 +7,8 @@ public enum EventTypes
     MicrophonePitch,
     NewPitchBounds,
     Runaway,
-    Investigate
+    Investigate,
+    Spookometer
 }
 
 [System.Serializable]
