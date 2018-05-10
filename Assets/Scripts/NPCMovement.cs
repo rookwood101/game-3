@@ -9,55 +9,92 @@ public class NPCMovement : MonoBehaviour {
     public GameObject ghost;
     public GameObject target;
 
+    private Pathfinding.AIPath NPCPath;
+    private Pathfinding.AIDestinationSetter NPCDestination;
+
     private bool isNearGhost;
     private bool isRunningAway;
-    private float speed = 700f;
+    private bool isInvestigating;
+
     private Rigidbody2D rb;
+
+    public int investigateSpeed;
+    public int runSpeed;
+    public int wanderSpeed;
 
 
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody2D>();
+        NPCPath = GetComponent<Pathfinding.AIPath>();
+        NPCDestination = GetComponent<Pathfinding.AIDestinationSetter>();
+
         EventManager.AddListener(EventTypes.Runaway, Runaway);
-	}
+        EventManager.AddListener(EventTypes.Investigate, Investigate);
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
 
-        Runaway(ghost);
-        UpdateRun();
-
-	}
-
-    private void UpdateRun()
-    {
+        //Checks if NPC is no longer near ghost, if not stop running
         if (!(isNearGhost = Physics2D.OverlapCircle(transform.position, ghostRadius, ghostLayer)) && isRunningAway)
         {
-            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            NPCPath.canMove = false;
             isRunningAway = false;
         }
         else if (isRunningAway)
         {
-            // Get direction to move away from ghost
-            Vector3 direction = transform.position - ghost.transform.position;
-            direction.z = 0;
+            UpdateRun();
+        }
+        else if (isNearGhost && isInvestigating)
+        {
+            UpdateInvestigate();
+        }
 
-            Vector3 newDirection = direction.normalized;
+
+    }
+
+    private void UpdateInvestigate()
+    {
+        NPCPath.maxSpeed = investigateSpeed;
+        NPCPath.canMove = true;
+
+        NPCDestination.target = ghost.transform;
+    }
+
+    private void UpdateRun()
+    {
+        NPCPath.maxSpeed = runSpeed;
+        NPCPath.canMove = true;
+        // Get direction to move away from ghost
+        Vector3 direction = transform.position - ghost.transform.position;
+        direction.z = 0;
+
+        Vector3 newDirection = direction.normalized;
             
 
-            target.transform.position = transform.position + newDirection * 40;
+        //Change target for AI search
+        target.transform.position = transform.position + newDirection * 40;
 
-            GetComponent<Pathfinding.AIDestinationSetter>().target = target.transform;
-        }
+        NPCDestination.target = target.transform;
     }
 
-    private void Runaway(object chaser)
+    private void Runaway(object npc)
     {
-        if(isNearGhost && ((GameObject)chaser).name == "Ghost")
+        if((GameObject)npc == gameObject)
         {
             isRunningAway = true;
+            isInvestigating = false;
         }
     }
 
-
+    private void Investigate(object npc)
+    {
+        if ((GameObject)npc == gameObject)
+        {
+            if(!isRunningAway)
+                isInvestigating = true;
+        }
+    }
 }

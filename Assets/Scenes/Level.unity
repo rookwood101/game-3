@@ -1094,56 +1094,40 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 0}
+    - target: {fileID: 114031643115027832, guid: 03b10e42483cb3d4cb448e324a5a77a2,
+        type: 2}
       propertyPath: ghost
       value: 
       objectReference: {fileID: 1305374451}
+    - target: {fileID: 114031643115027832, guid: 03b10e42483cb3d4cb448e324a5a77a2,
+        type: 2}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 766056623}
     - target: {fileID: 114055223618852416, guid: 03b10e42483cb3d4cb448e324a5a77a2,
         type: 2}
       propertyPath: target
       value: 
       objectReference: {fileID: 1887696635}
-    - target: {fileID: 0}
-      propertyPath: ghostRadius
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: wallRadius
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 766056623}
     - target: {fileID: 114922830195960680, guid: 03b10e42483cb3d4cb448e324a5a77a2,
         type: 2}
       propertyPath: canMove
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114031643115027832, guid: 03b10e42483cb3d4cb448e324a5a77a2,
         type: 2}
-      propertyPath: ghost
-      value: 
-      objectReference: {fileID: 1305374451}
-    - target: {fileID: 114031643115027832, guid: 03b10e42483cb3d4cb448e324a5a77a2,
-        type: 2}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 766056623}
-    - target: {fileID: 114031643115027832, guid: 03b10e42483cb3d4cb448e324a5a77a2,
-        type: 2}
-      propertyPath: ghostRadius
-      value: 30
+      propertyPath: investigateSpeed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114031643115027832, guid: 03b10e42483cb3d4cb448e324a5a77a2,
         type: 2}
-      propertyPath: wallRadius
-      value: 3
+      propertyPath: runSpeed
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 114031643115027832, guid: 03b10e42483cb3d4cb448e324a5a77a2,
         type: 2}
-      propertyPath: ghostLayer.m_Bits
-      value: 256
+      propertyPath: wanderSpeed
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 03b10e42483cb3d4cb448e324a5a77a2, type: 2}
@@ -5764,11 +5748,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4458577438368616, guid: 4784d74d36596a349812452631d49a7a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2.9
       objectReference: {fileID: 0}
     - target: {fileID: 4458577438368616, guid: 4784d74d36596a349812452631d49a7a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -39.4
       objectReference: {fileID: 0}
     - target: {fileID: 4458577438368616, guid: 4784d74d36596a349812452631d49a7a, type: 2}
       propertyPath: m_LocalPosition.z
