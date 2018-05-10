@@ -6,8 +6,10 @@ public class NPCMovement : MonoBehaviour {
 
     public LayerMask ghostLayer;
     public float ghostRadius;
-    public GameObject ghost;
+    private GameObject ghost;
     public GameObject target;
+
+    public float wanderingRadius;
 
     private Pathfinding.AIPath NPCPath;
     private Pathfinding.AIDestinationSetter NPCDestination;
@@ -28,6 +30,7 @@ public class NPCMovement : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         NPCPath = GetComponent<Pathfinding.AIPath>();
         NPCDestination = GetComponent<Pathfinding.AIDestinationSetter>();
+        ghost = GameObject.Find("Ghost");
 
         EventManager.AddListener(EventTypes.Runaway, Runaway);
         EventManager.AddListener(EventTypes.Investigate, Investigate);
@@ -36,7 +39,7 @@ public class NPCMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+        Runaway(gameObject);
         //Checks if NPC is no longer near ghost, if not stop running
         if (!(isNearGhost = Physics2D.OverlapCircle(transform.position, ghostRadius, ghostLayer)) && isRunningAway)
         {
@@ -52,6 +55,11 @@ public class NPCMovement : MonoBehaviour {
             UpdateInvestigate();
         }
 
+
+    }
+
+    private void UpdateWandering()
+    {
 
     }
 
