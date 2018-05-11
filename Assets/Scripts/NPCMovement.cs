@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCMovement : MonoBehaviour {
+public class NPCMovement : MonoBehaviour
+{
 
     public LayerMask ghostLayer;
     public float ghostRadius;
@@ -25,8 +26,9 @@ public class NPCMovement : MonoBehaviour {
     public int wanderSpeed;
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         rb = GetComponent<Rigidbody2D>();
         NPCPath = GetComponent<Pathfinding.AIPath>();
         NPCDestination = GetComponent<Pathfinding.AIDestinationSetter>();
@@ -101,7 +103,7 @@ public class NPCMovement : MonoBehaviour {
         direction.z = 0;
 
         Vector3 newDirection = direction.normalized;
-            
+
 
         //Change target for AI search
         target.transform.position = transform.position + newDirection * 40;
@@ -111,7 +113,7 @@ public class NPCMovement : MonoBehaviour {
 
     private void Runaway(object npc)
     {
-        if((GameObject)npc == gameObject)
+        if ((GameObject)npc == gameObject)
         {
             isRunningAway = true;
             isInvestigating = false;
@@ -122,7 +124,7 @@ public class NPCMovement : MonoBehaviour {
     {
         if ((GameObject)npc == gameObject)
         {
-            if(!isRunningAway)
+            if (!isRunningAway)
                 isInvestigating = true;
         }
     }

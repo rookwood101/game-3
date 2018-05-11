@@ -5,16 +5,18 @@ using UnityEngine;
 public class FearWriter : MonoBehaviour
 {
     AmISpooked amISpooked;
-    TextMesh text;
+    [SerializeField]
+    GameObject fearSliderPrefab;
+    GameObject fearSlider;
 
     private void Awake()
     {
         amISpooked = GetComponent<AmISpooked>();
-        text = GetComponentInChildren<TextMesh>();
+        fearSlider = Instantiate(fearSliderPrefab, GameObject.Find("Canvas").transform);
     }
 
     private void Update()
     {
-        text.text = amISpooked.fear.ToString();
+        // text.text = amISpooked.fear.ToString();
     }
 }

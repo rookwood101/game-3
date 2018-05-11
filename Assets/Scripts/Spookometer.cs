@@ -24,6 +24,18 @@ public class Spookometer : MonoBehaviour
         EventManager.AddListener(EventTypes.NewPitchBounds, OnNewPitchBounds);
     }
 
+    private void Update()
+    {
+        if (compressionRatio > 1)
+        {
+            text.color = Color.green;
+        }
+        else
+        {
+            text.color = Color.grey;
+        }
+    }
+
     private void OnNewPitchBounds(object pitchBoundsObj)
     {
         float[] pitchBounds = (float[])pitchBoundsObj;
