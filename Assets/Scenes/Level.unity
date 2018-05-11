@@ -1339,7 +1339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NPCPrefab: {fileID: 1052972003118646, guid: 03b10e42483cb3d4cb448e324a5a77a2, type: 2}
-  spawnTime: 20
+  spawnTime: 60
 --- !u!1001 &356771769
 Prefab:
   m_ObjectHideFlags: 0
@@ -1393,6 +1393,16 @@ Prefab:
         type: 2}
       propertyPath: ghostRadius
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114031643115027832, guid: 03b10e42483cb3d4cb448e324a5a77a2,
+        type: 2}
+      propertyPath: wanderingRadius
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 114031643115027832, guid: 03b10e42483cb3d4cb448e324a5a77a2,
+        type: 2}
+      propertyPath: wanderSpeed
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 03b10e42483cb3d4cb448e324a5a77a2, type: 2}
