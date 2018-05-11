@@ -72,7 +72,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1255183237774260}
   m_LocalRotation: {x: -0, y: -0, z: 0.011824877, w: 0.99993014}
-  m_LocalPosition: {x: -216.70743, y: 0, z: 0.7}
+  m_LocalPosition: {x: -7.637017, y: -5.796783, z: 0.7}
   m_LocalScale: {x: 14.694295, y: 7.341479, z: 1}
   m_Children: []
   m_Father: {fileID: 4381110897120908}
@@ -127,12 +127,12 @@ MonoBehaviour:
   ghostLayer:
     serializedVersion: 2
     m_Bits: 256
-  ghostRadius: 5
+  ghostRadius: 20
   target: {fileID: 1255183237774260}
-  wanderingRadius: 0
+  wanderingRadius: 40
   investigateSpeed: 5
   runSpeed: 12
-  wanderSpeed: 7
+  wanderSpeed: 10
 --- !u!114 &114055223618852416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -214,8 +214,8 @@ MonoBehaviour:
   version: 2
   repathRate: 0.5
   canSearch: 1
-  canMove: 0
-  maxSpeed: 12
+  canMove: 1
+  maxSpeed: 10
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
