@@ -8,7 +8,8 @@ public enum EventTypes
     NewPitchBounds,
     Runaway,
     Investigate,
-    Spookometer
+    Spookometer,
+    NewVolumeBounds
 }
 
 [System.Serializable]

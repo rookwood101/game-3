@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrackGameObject : MonoBehaviour
+public class FollowEntity2 : MonoBehaviour
 {
     public GameObject toTrack;
     public Vector3 offset;
