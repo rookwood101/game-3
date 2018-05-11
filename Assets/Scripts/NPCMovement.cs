@@ -38,11 +38,10 @@ public class NPCMovement : MonoBehaviour
         EventManager.AddListener(EventTypes.Investigate, Investigate);
 
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // Runaway(gameObject);
+	
+	// Update is called once per frame
+	void Update () {
+        
         //Checks if NPC is no longer near ghost, if not stop running
         if (!(isNearGhost = Physics2D.OverlapCircle(transform.position, ghostRadius, ghostLayer)) && isRunningAway)
         {
@@ -57,12 +56,33 @@ public class NPCMovement : MonoBehaviour
         {
             UpdateInvestigate();
         }
+        else
+        {
+            UpdateWandering();
+        }
 
 
     }
 
     private void UpdateWandering()
     {
+        Debug.Log("Wandering");
+        if (NPCPath.reachedEndOfPath || !NPCPath.canMove)
+        {
+            NPCPath.canMove = true;
+            target.transform.position = PickRandomPoint();
+            NPCDestination.target = target.transform;
+            NPCPath.SearchPath();
+        }
+    }
+
+    private Vector2 PickRandomPoint()
+    {
+        Vector3 point = Random.insideUnitCircle * wanderingRadius;
+        point.z = 0;
+
+        point += NPCPath.position;
+        return point;
 
     }
 
