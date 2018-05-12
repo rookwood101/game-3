@@ -29,6 +29,7 @@ public class NPCMovement : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        target = new GameObject("Target");
         rb = GetComponent<Rigidbody2D>();
         NPCPath = GetComponent<Pathfinding.AIPath>();
         NPCDestination = GetComponent<Pathfinding.AIDestinationSetter>();
@@ -66,13 +67,17 @@ public class NPCMovement : MonoBehaviour
     private void UpdateWandering()
     {
         Debug.Log("Wandering");
-        if (!NPCPath.reachedEndOfPath || !NPCPath.canMove)
+        Debug.Log(!NPCPath.pathPending && NPCPath.reachedEndOfPath || NPCDestination.target == null);
+
+
+        if (!NPCPath.pathPending && NPCPath.reachedEndOfPath || NPCDestination.target == null)
         {
-            NPCPath.maxSpeed = wanderSpeed;
+            Debug.Log("Hello");
+            //NPCPath.maxSpeed = wanderSpeed;
             NPCPath.canMove = true;
             target.transform.position = PickRandomPoint();
             NPCDestination.target = target.transform;
-            NPCPath.SearchPath();
+            
         }
     }
 

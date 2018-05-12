@@ -39,15 +39,15 @@ public class AmISpooked : MonoBehaviour
 
     private void Update()
     {
-        UpdateFancy();
-        // if (spookometer > 1 && (transform.position - ghost.transform.position).magnitude < 5)
-        // {
-        //     fear += (spookometer - 1) * Time.deltaTime;
-        // }
-        // if (fear > 3)
-        // {
-        //     EventManager.TriggerEvent(EventTypes.Runaway, gameObject);
-        // }
+        //UpdateFancy();
+        if (spookometer > 1 && (transform.position - ghost.transform.position).magnitude < 5)
+        {
+            fear += (spookometer - 1) * Time.deltaTime;
+        }
+        if (fear > 3)
+        {
+            EventManager.TriggerEvent(EventTypes.Runaway, gameObject);
+        }
     }
 
     private void UpdateFancy()
