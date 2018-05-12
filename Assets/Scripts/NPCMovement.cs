@@ -53,7 +53,7 @@ public class NPCMovement : MonoBehaviour
             //Checks if NPC is no longer near ghost, if not stop running
             if (!(isNearGhost = Physics2D.OverlapCircle(transform.position, ghostRadius, ghostLayer)) && isRunningAway)
             {
-                NPCPath.canMove = false;
+                ghost.layer = 0;
                 isRunningAway = false;
             }
             else if (isRunningAway)
@@ -74,20 +74,21 @@ public class NPCMovement : MonoBehaviour
 
     private async Task UpdateWandering()
     {
-            // If NPC reaches end of path and there is no new path set or start of game
-            if (!NPCPath.pathPending && NPCPath.reachedEndOfPath || NPCDestination.target == null)
-            {
-                NPCPath.canMove = false;
-                Debug.Log("Hello");
-                NPCPath.maxSpeed = wanderSpeed;
+        // If NPC reaches end of path and there is no new path set or start of game
+        if (!NPCPath.pathPending && NPCPath.reachedEndOfPath || NPCDestination.target == null)
+        {
+            // Pause
+            NPCPath.canMove = false;
+            NPCPath.maxSpeed = wanderSpeed;
 
-                // Move NPC to random point in radius around NPC
-                target.transform.position = PickRandomPoint();
+            // Move NPC to random point in radius around NPC
+            target.transform.position = PickRandomPoint();
 
-                NPCDestination.target = target.transform;
-
-                await Task.Delay(7000);
-                NPCPath.canMove = true;
+            NPCDestination.target = target.transform;
+                
+            //After 7 seconds start following the path
+            await Wait.ForIEnumerator(new WaitForSeconds(7));
+            NPCPath.canMove = true;
         }
 
     }
@@ -135,6 +136,8 @@ public class NPCMovement : MonoBehaviour
     {
         if ((GameObject)npc == gameObject)
         {
+            ghost.layer = 8;
+
             isRunningAway = true;
             isInvestigating = false;
         }
