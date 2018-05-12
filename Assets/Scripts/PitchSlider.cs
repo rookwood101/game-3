@@ -19,10 +19,6 @@ public class PitchSlider : MonoBehaviour
     private void Awake()
     {
         slider = GetComponent<Slider>();
-        setMin = GameObject.Find("Set Min").GetComponent<Button>();
-        setMin.onClick.AddListener(new UnityAction(OnSetMin));
-        setMax = GameObject.Find("Set Max").GetComponent<Button>();
-        setMax.onClick.AddListener(new UnityAction(OnSetMax));
         sliderColorBlock = slider.colors;
         valueText = GameObject.Find("Slider Value").GetComponent<Text>();
         EventManager.AddListener(EventTypes.MicrophonePitch, OnPitchChange);
