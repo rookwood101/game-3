@@ -9,7 +9,8 @@ public enum EventTypes
     Runaway,
     Investigate,
     Spookometer,
-    NewVolumeBounds
+    NewVolumeBounds,
+    StopRunaway
 }
 
 [System.Serializable]

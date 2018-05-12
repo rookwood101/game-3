@@ -6,15 +6,18 @@ using UnityEngine;
 
 public class AmISpooked : MonoBehaviour
 {
-    private float spookometer = 0;
+    private float spookometerTotal = 0;
+    private uint spookometerSamples = 0;
     private GameObject ghost;// inverse square law - spooked less if ghost further away
-    private float volume = 0;
+    private float volumeTotal = 0;
+    private uint volumeSamples = 0;
     private float lowVolumeThreshold = 0.25f;
     private float highVolumeThreshold = 0.75f;
     private float lowDistanceThreshold = 5;
+    private bool runningAway = false;
 
     [HideInInspector]
-    public float tenseness;// How tense they are right now - quiet spookyness brings this up
+    public float tenseness = 0;// How tense they are right now - quiet spookyness brings this up
     private float unconfidence = 100;// Their general confidence - affects how tense they get
 
     [HideInInspector]
@@ -46,6 +49,43 @@ public class AmISpooked : MonoBehaviour
         while (true)
         {
             await Wait.ForIEnumerator(new WaitForSeconds(0.2f));
+            if (spookometerSamples == 0 || volumeSamples == 0)
+            {
+                continue;
+            }
+            float spookometer = spookometerTotal / spookometerSamples;
+            spookometerTotal = 0;
+            spookometerSamples = 0;
+            float volume = volumeTotal / volumeSamples;
+            volumeTotal = 0;
+            volumeSamples = 0;
+
+            // decay
+            if (tenseness > 0.01f)
+            {
+                tenseness -= 0.01f;
+            }
+            else
+            {
+                tenseness = 0;
+            }
+            if (fear > 0.01f)
+            {
+                fear -= 0.01f;
+            }
+            else
+            {
+                fear = 0;
+            }
+
+            if (fear > 5 && !runningAway)
+            {
+                EventManager.TriggerEvent(EventTypes.Runaway, gameObject);
+            }
+            if (fear < 5 && runningAway)
+            {
+                EventManager.TriggerEvent(EventTypes.StopRunaway, gameObject);
+            }
             if (spookometer < 1)
             {
                 continue;
@@ -59,7 +99,7 @@ public class AmISpooked : MonoBehaviour
             }
             else
             {
-                float fearIncrease = volumeDistance * spookometer * fragility * tenseness;
+                float fearIncrease = volumeDistance * spookometer * fragility * Mathf.Log(tenseness + 1, 2);
                 fear += fearIncrease;
             }
         }
@@ -67,11 +107,13 @@ public class AmISpooked : MonoBehaviour
 
     private void OnMicrophoneVolumeChange(object volumeObj)
     {
-        volume = (float)volumeObj;
+        volumeTotal += (float)volumeObj;
+        volumeSamples++;
     }
 
     private void OnSpookometerChange(object spookometerObj)
     {
-        spookometer = (float)spookometerObj;
+        spookometerTotal += (float)spookometerObj;
+        spookometerSamples++;
     }
 }
