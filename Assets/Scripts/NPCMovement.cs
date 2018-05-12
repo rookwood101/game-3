@@ -50,7 +50,6 @@ public class NPCMovement : MonoBehaviour
     {
         if((GameObject) npcRunning == gameObject)
         {
-            ghost.layer = 0;
             isRunningAway = false;
             NPCDestination.target = GameObject.Find("FrontDoor").transform;
         }

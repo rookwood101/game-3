@@ -12,9 +12,13 @@ public class FearWriter : MonoBehaviour
     Slider tensenessSlider;
     GameObject fearSliderGO;
     GameObject tensenessSliderGO;
+    GameObject ghost;
 
     private void Awake()
     {
+
+        ghost = GameObject.Find("Ghost");
+
         amISpooked = GetComponent<AmISpooked>();
         fearSliderGO = Instantiate(fearSliderPrefab, GameObject.Find("Canvas").transform);
         FollowEntity2 fearFollowEntity = fearSliderGO.GetComponent<FollowEntity2>();
@@ -41,6 +45,7 @@ public class FearWriter : MonoBehaviour
     {
         if((GameObject)exitingNpc == gameObject)
         {
+            ghost.layer = 0;
             Destroy(fearSliderGO);
             Destroy(tensenessSliderGO);
             Destroy(gameObject);
