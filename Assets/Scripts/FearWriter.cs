@@ -28,9 +28,9 @@ public class FearWriter : MonoBehaviour
         this.tensenessSlider = tensenessSliderGO.GetComponent<Slider>();
 
         fearSlider.minValue = 0;
-        fearSlider.maxValue = 4;
+        fearSlider.maxValue = 1000;
         tensenessSlider.minValue = 0;
-        tensenessSlider.maxValue = 4;
+        tensenessSlider.maxValue = 1000;
     }
 
     private void LateUpdate()
