@@ -10,16 +10,18 @@ public class FearWriter : MonoBehaviour
     GameObject fearSliderPrefab;
     Slider fearSlider;
     Slider tensenessSlider;
+    GameObject fearSliderGO;
+    GameObject tensenessSliderGO;
 
     private void Awake()
     {
         amISpooked = GetComponent<AmISpooked>();
-        GameObject fearSliderGO = Instantiate(fearSliderPrefab, GameObject.Find("Canvas").transform);
+        fearSliderGO = Instantiate(fearSliderPrefab, GameObject.Find("Canvas").transform);
         FollowEntity2 fearFollowEntity = fearSliderGO.GetComponent<FollowEntity2>();
         fearFollowEntity.toTrack = gameObject;
         fearFollowEntity.offset = new Vector3(0, 2, 0);
 
-        GameObject tensenessSliderGO = Instantiate(fearSliderPrefab, GameObject.Find("Canvas").transform);
+        tensenessSliderGO = Instantiate(fearSliderPrefab, GameObject.Find("Canvas").transform);
         FollowEntity2 tenseFollowEntity = tensenessSliderGO.GetComponent<FollowEntity2>();
         tenseFollowEntity.toTrack = gameObject;
         tenseFollowEntity.offset = new Vector3(0, 3, 0);
@@ -31,6 +33,18 @@ public class FearWriter : MonoBehaviour
         fearSlider.maxValue = 1000;
         tensenessSlider.minValue = 0;
         tensenessSlider.maxValue = 1000;
+
+        EventManager.AddListener(EventTypes.NPCExit, DestroyNPC);
+    }
+
+    private void DestroyNPC(object exitingNpc)
+    {
+        if((GameObject)exitingNpc == gameObject)
+        {
+            Destroy(fearSliderGO);
+            Destroy(tensenessSliderGO);
+            Destroy(gameObject);
+        }
     }
 
     private void LateUpdate()

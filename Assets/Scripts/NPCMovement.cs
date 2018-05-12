@@ -48,6 +48,7 @@ public class NPCMovement : MonoBehaviour
     // Update is called once per frame
     private async Task MovementHandling()
     {
+        Runaway(gameObject);
         while (true)
         {
             //Checks if NPC is no longer near ghost, if not stop running
@@ -55,6 +56,7 @@ public class NPCMovement : MonoBehaviour
             {
                 ghost.layer = 0;
                 isRunningAway = false;
+                NPCDestination.target = GameObject.Find("FrontDoor").transform;
             }
             else if (isRunningAway)
             {

@@ -27,9 +27,10 @@ GameObject:
   - component: {fileID: 114760640553704594}
   - component: {fileID: 114497875952657646}
   - component: {fileID: 61704633671804866}
+  - component: {fileID: 50418627201386600}
   m_Layer: 0
   m_Name: NPC
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,12 +42,32 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1052972003118646}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.7, y: -3.7, z: -0.7}
+  m_LocalPosition: {x: 13.7, y: -3.7, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50418627201386600
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1052972003118646}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &61704633671804866
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -91,7 +112,7 @@ MonoBehaviour:
   wanderingRadius: 40
   investigateSpeed: 5
   runSpeed: 12
-  wanderSpeed: 10
+  wanderSpeed: 7
 --- !u!114 &114055223618852416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -156,9 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tenseness: 0
-  unconfidence: 0
   fear: 0
-  fragility: 0
 --- !u!114 &114922830195960680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -185,7 +204,7 @@ MonoBehaviour:
   maxAcceleration: -2.5
   rotationSpeed: 360
   slowdownDistance: 2
-  pickNextWaypointDist: 2
+  pickNextWaypointDist: 2.7
   endReachedDistance: 0.2
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1

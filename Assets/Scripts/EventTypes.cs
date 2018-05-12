@@ -8,6 +8,7 @@ public enum EventTypes
     NewPitchBounds,
     Runaway,
     Investigate,
+    NPCExit,
     Spookometer,
     NewVolumeBounds
 }
