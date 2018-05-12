@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class NPCMovement : MonoBehaviour
@@ -18,12 +19,14 @@ public class NPCMovement : MonoBehaviour
     private bool isNearGhost;
     private bool isRunningAway;
     private bool isInvestigating;
+    private bool isWandering;
 
     private Rigidbody2D rb;
 
     public int investigateSpeed;
     public int runSpeed;
     public int wanderSpeed;
+
 
 
     // Use this for initialization
@@ -38,54 +41,64 @@ public class NPCMovement : MonoBehaviour
         EventManager.AddListener(EventTypes.Runaway, Runaway);
         EventManager.AddListener(EventTypes.Investigate, Investigate);
 
-    }
-	
-	// Update is called once per frame
-	void Update () {
-        //Checks if NPC is no longer near ghost, if not stop running
-        if (!(isNearGhost = Physics2D.OverlapCircle(transform.position, ghostRadius, ghostLayer)) && isRunningAway)
-        {
-            NPCPath.canMove = false;
-            isRunningAway = false;
-        }
-        else if (isRunningAway)
-        {
-            UpdateRun();
-        }
-        else if (isNearGhost && isInvestigating)
-        {
-            UpdateInvestigate();
-        }
-        else
-        {
-            UpdateWandering();
-        }
-
+        MovementHandling();
 
     }
 
-    private void UpdateWandering()
+    // Update is called once per frame
+    private async Task MovementHandling()
     {
-        Debug.Log("Wandering");
-        Debug.Log(!NPCPath.pathPending && NPCPath.reachedEndOfPath || NPCDestination.target == null);
-
-
-        if (!NPCPath.pathPending && NPCPath.reachedEndOfPath || NPCDestination.target == null)
+        while (true)
         {
-            Debug.Log("Hello");
-            //NPCPath.maxSpeed = wanderSpeed;
-            NPCPath.canMove = true;
-            target.transform.position = PickRandomPoint();
-            NPCDestination.target = target.transform;
-            
+            //Checks if NPC is no longer near ghost, if not stop running
+            if (!(isNearGhost = Physics2D.OverlapCircle(transform.position, ghostRadius, ghostLayer)) && isRunningAway)
+            {
+                NPCPath.canMove = false;
+                isRunningAway = false;
+            }
+            else if (isRunningAway)
+            {
+                UpdateRun();
+            }
+            else if (isNearGhost && isInvestigating)
+            {
+                UpdateInvestigate();
+            }
+            else
+            {
+                await UpdateWandering();
+            }
+            await Wait.ForIEnumerator(null);
         }
+    }
+
+    private async Task UpdateWandering()
+    {
+            // If NPC reaches end of path and there is no new path set or start of game
+            if (!NPCPath.pathPending && NPCPath.reachedEndOfPath || NPCDestination.target == null)
+            {
+                NPCPath.canMove = false;
+                Debug.Log("Hello");
+                NPCPath.maxSpeed = wanderSpeed;
+
+                // Move NPC to random point in radius around NPC
+                target.transform.position = PickRandomPoint();
+
+                NPCDestination.target = target.transform;
+
+                await Task.Delay(7000);
+                NPCPath.canMove = true;
+        }
+
     }
 
     private Vector2 PickRandomPoint()
     {
+        // Pick a random point in an area
         Vector3 point = Random.insideUnitCircle * wanderingRadius;
         point.z = 0;
 
+        // Set are to around NPC
         point += NPCPath.position;
         return point;
 
@@ -93,6 +106,7 @@ public class NPCMovement : MonoBehaviour
 
     private void UpdateInvestigate()
     {
+        // Move slowly towards ghost if speaking quietly
         NPCPath.maxSpeed = investigateSpeed;
         NPCPath.canMove = true;
 
@@ -101,6 +115,7 @@ public class NPCMovement : MonoBehaviour
 
     private void UpdateRun()
     {
+        // Run fast away from ghost if speaking loudly
         NPCPath.maxSpeed = runSpeed;
         NPCPath.canMove = true;
         // Get direction to move away from ghost
