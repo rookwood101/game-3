@@ -13,7 +13,7 @@ public class AmISpooked : MonoBehaviour
     private uint volumeSamples = 0;
     private float lowVolumeThreshold = 0.25f;
     private float highVolumeThreshold = 0.75f;
-    private float lowDistanceThreshold = 5;
+    private float lowDistanceThreshold = 10;
     private bool runningAway = false;
 
     [HideInInspector]
@@ -99,7 +99,7 @@ public class AmISpooked : MonoBehaviour
             }
             else
             {
-                float fearIncrease = volumeDistance * spookometer * fragility * Mathf.Log(tenseness + 1, 2);
+                float fearIncrease = volumeDistance * spookometer * fragility * Mathf.Log(tenseness + 1);
                 fear += fearIncrease;
             }
         }
