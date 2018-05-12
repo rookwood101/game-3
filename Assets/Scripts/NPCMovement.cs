@@ -40,25 +40,28 @@ public class NPCMovement : MonoBehaviour
 
         EventManager.AddListener(EventTypes.Runaway, Runaway);
         EventManager.AddListener(EventTypes.Investigate, Investigate);
+        EventManager.AddListener(EventTypes.StopRunaway, RunToDoor);
 
         MovementHandling();
 
     }
 
+    private void RunToDoor(object npcRunning)
+    {
+        if((GameObject) npcRunning == gameObject)
+        {
+            ghost.layer = 0;
+            isRunningAway = false;
+            NPCDestination.target = GameObject.Find("FrontDoor").transform;
+        }
+    }
+
     // Update is called once per frame
     private async Task MovementHandling()
     {
-        Runaway(gameObject);
         while (true)
         {
-            //Checks if NPC is no longer near ghost, if not stop running
-            if (!(isNearGhost = Physics2D.OverlapCircle(transform.position, ghostRadius, ghostLayer)) && isRunningAway)
-            {
-                ghost.layer = 0;
-                isRunningAway = false;
-                NPCDestination.target = GameObject.Find("FrontDoor").transform;
-            }
-            else if (isRunningAway)
+            if (isRunningAway)
             {
                 UpdateRun();
             }
