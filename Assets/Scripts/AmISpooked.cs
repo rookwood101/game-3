@@ -12,8 +12,8 @@ public class AmISpooked : MonoBehaviour
     private GameObject ghost;// inverse square law - spooked less if ghost further away
     private float volumeTotal = 0;
     private uint volumeSamples = 0;
-    private float lowVolumeThreshold = 0.25f;
-    private float lowDistanceThreshold = 10;
+    private const float lowDistanceThreshold = 10;
+    private float lowVolumeThreshold = 0.25f * (1f / (4 * Mathf.PI * lowDistanceThreshold * lowDistanceThreshold));
     private bool runningAway = false;
     private bool investigating = false;
     private bool isRunningToDoor = false;

@@ -12608,6 +12608,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114922830195960680, guid: 03b10e42483cb3d4cb448e324a5a77a2,
+        type: 2}
+      propertyPath: rotationIn2D
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 03b10e42483cb3d4cb448e324a5a77a2, type: 2}
   m_IsPrefabParent: 0
