@@ -13,10 +13,6 @@ public class VolumeSlider : MonoBehaviour
     private Text valueText;
     private float roundedVol = 0;
 
-    Color activeColor = new Color(255, 0, 0, 255);
-    Color inActiveColor = new Color(255, 255, 255, 127);
-    ColorBlock sliderColorBlock;
-
     private void Awake()
     {
         slider = GetComponent<Slider>();
@@ -24,7 +20,6 @@ public class VolumeSlider : MonoBehaviour
         setMin.onClick.AddListener(new UnityAction(OnSetMin));
         setMax = GameObject.Find("Set Max Vol").GetComponent<Button>();
         setMax.onClick.AddListener(new UnityAction(OnSetMax));
-        sliderColorBlock = slider.colors;
         valueText = GameObject.Find("Slider Value Vol").GetComponent<Text>();
         EventManager.AddListener(EventTypes.MicrophoneVolume, OnVolumeChange);
     }

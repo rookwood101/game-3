@@ -37,14 +37,14 @@ public class FearWriter : MonoBehaviour
         fearSlider.minValue = 0;
         fearSlider.maxValue = 10;
         tensenessSlider.minValue = 0;
-        tensenessSlider.maxValue = 10;
+        tensenessSlider.maxValue = 1;
 
         EventManager.AddListener(EventTypes.NPCExit, DestroyNPC);
     }
 
     private void DestroyNPC(object exitingNpc)
     {
-        if((GameObject)exitingNpc == gameObject)
+        if ((GameObject)exitingNpc == gameObject)
         {
             ghost.layer = 0;
             Destroy(fearSliderGO);

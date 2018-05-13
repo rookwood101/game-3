@@ -12,9 +12,9 @@ public class AmISpooked : MonoBehaviour
     private float volumeTotal = 0;
     private uint volumeSamples = 0;
     private float lowVolumeThreshold = 0.25f;
-    private float highVolumeThreshold = 0.75f;
     private float lowDistanceThreshold = 10;
     private bool runningAway = false;
+    private float timeOfLastSpook = 0;
 
     [HideInInspector]
     public float tenseness = 0;// How tense they are right now - quiet spookyness brings this up
@@ -61,24 +61,27 @@ public class AmISpooked : MonoBehaviour
             volumeSamples = 0;
 
             // decay
-            if (tenseness > 0.01f)
+            if (Time.time - timeOfLastSpook > 1)
             {
-                tenseness -= 0.01f;
-            }
-            else
-            {
-                tenseness = 0;
-            }
-            if (fear > 0.01f)
-            {
-                fear -= 0.01f;
-            }
-            else
-            {
-                fear = 0;
+                if (tenseness > 0.01f)
+                {
+                    tenseness -= 0.01f;
+                }
+                else
+                {
+                    tenseness = 0;
+                }
+                if (fear > 0.01f)
+                {
+                    fear -= 0.01f;
+                }
+                else
+                {
+                    fear = 0;
+                }
             }
 
-            if (fear > 5 && !runningAway)
+            if (fear >= 5 && !runningAway)
             {
                 EventManager.TriggerEvent(EventTypes.Runaway, gameObject);
             }
@@ -90,6 +93,7 @@ public class AmISpooked : MonoBehaviour
             {
                 continue;
             }
+            timeOfLastSpook = Time.time;
             float inverseSquareDistance = 1f / (4 * Mathf.PI * (transform.position - ghost.transform.position).sqrMagnitude);
             float volumeDistance = volume * inverseSquareDistance;
             if (volumeDistance < lowVolumeThreshold) // increase tenseness

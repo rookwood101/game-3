@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class Spookometer : MonoBehaviour
 {
-    float minPitch = 0;
-    float maxPitch = 0;
+    // float minPitch = 0;
+    // float maxPitch = 0;
     float _pitchSampleRange = 3; // in seconds
     int pitchSampleCount;
     float compressionRatio = 0;
@@ -21,7 +21,7 @@ public class Spookometer : MonoBehaviour
         text = GetComponent<Text>();
         pitchSampleCount = (int)(_pitchSampleRange / Time.fixedDeltaTime);
         EventManager.AddListener(EventTypes.MicrophonePitch, OnMicrophonePitch);
-        EventManager.AddListener(EventTypes.NewPitchBounds, OnNewPitchBounds);
+        // EventManager.AddListener(EventTypes.NewPitchBounds, OnNewPitchBounds);
     }
 
     private void Update()
@@ -36,12 +36,12 @@ public class Spookometer : MonoBehaviour
         }
     }
 
-    private void OnNewPitchBounds(object pitchBoundsObj)
-    {
-        float[] pitchBounds = (float[])pitchBoundsObj;
-        minPitch = pitchBounds[0];
-        maxPitch = pitchBounds[1];
-    }
+    // private void OnNewPitchBounds(object pitchBoundsObj)
+    // {
+    //     float[] pitchBounds = (float[])pitchBoundsObj;
+    //     minPitch = pitchBounds[0];
+    //     maxPitch = pitchBounds[1];
+    // }
 
     private void OnMicrophonePitch(object pitchObj)
     {

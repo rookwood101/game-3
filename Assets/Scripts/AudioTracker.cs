@@ -13,7 +13,6 @@ public class AudioTracker : MonoBehaviour
     private float? currentPitch = null;
     private int numPitchSamples = 0;
     private bool isTrackingAudio = false;
-    private float previousVol = 0;
 
     private string DEVICE_NAME;
     private const int RECORD_FREQUENCY = 44100;
