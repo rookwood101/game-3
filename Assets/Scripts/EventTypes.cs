@@ -13,7 +13,8 @@ public enum EventTypes
     NewVolumeBounds,
     StopRunaway,
     StopInvestigate,
-    UpdateScore
+    UpdateScore,
+    RunToDoor
 }
 
 [System.Serializable]

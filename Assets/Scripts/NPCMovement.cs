@@ -40,6 +40,7 @@ public class NPCMovement : MonoBehaviour
         EventManager.AddListener(EventTypes.Investigate, Investigate);
         EventManager.AddListener(EventTypes.StopRunaway, RunToDoor);
         EventManager.AddListener(EventTypes.StopInvestigate, StopInvestigation);
+        EventManager.AddListener(EventTypes.RunToDoor, RunToDoor);
     }
 
     // Use this for initialization
@@ -54,6 +55,7 @@ public class NPCMovement : MonoBehaviour
         if ((GameObject)npcRunning == gameObject)
         {
             isRunningAway = false;
+            isInvestigating = false;
             NPCDestination.target = GameObject.Find("FrontDoor").transform;
         }
     }

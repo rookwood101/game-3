@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class UpdateScore : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    private void Awake()
+    {
+        //EventManager.AddListener(EventTypes.UpdateScore, )
+    }
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	

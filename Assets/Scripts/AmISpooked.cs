@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AmISpooked : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class AmISpooked : MonoBehaviour
     private float lowDistanceThreshold = 10;
     private bool runningAway = false;
     private bool investigating = false;
+    private bool isRunningToDoor = false;
     private float timeOfLastSpook = 0;
 
     [HideInInspector]
@@ -82,22 +84,32 @@ public class AmISpooked : MonoBehaviour
                 }
             }
 
-            if (tenseness >= 0.1 && !runningAway && !investigating)
+            if (tenseness >= 0.1 && !runningAway && !investigating && !isRunningToDoor)
             {
                 investigating = true;
                 EventManager.TriggerEvent(EventTypes.Investigate, gameObject);
             }
-            if (tenseness < 0.1 && !runningAway && investigating)
+            if (tenseness < 0.1 && !runningAway && investigating && !isRunningToDoor)
             {
                 investigating = false;
                 EventManager.TriggerEvent(EventTypes.StopInvestigate, gameObject);
             }
-            if (fear >= 3 && !runningAway)
+            if (fear >= 3 && !runningAway && !isRunningToDoor)
             {
-                runningAway = true;
-                EventManager.TriggerEvent(EventTypes.Runaway, gameObject);
+                Scene currentScene = SceneManager.GetActiveScene();
+                if (currentScene.name == "Tutorial")
+                {
+                    Debug.Log("Running to door");
+                    isRunningToDoor = true;
+                    EventManager.TriggerEvent(EventTypes.RunToDoor, gameObject);
+                }
+                else
+                {
+                    runningAway = true;
+                    EventManager.TriggerEvent(EventTypes.Runaway, gameObject);
+                }
             }
-            if (fear < 3 && runningAway)
+            if (fear < 3 && runningAway && !isRunningToDoor)
             {
                 runningAway = false;
                 EventManager.TriggerEvent(EventTypes.StopRunaway, gameObject);
