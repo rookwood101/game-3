@@ -20,6 +20,7 @@ public class NPCMovement : MonoBehaviour
     private bool isRunningAway;
     private bool isInvestigating;
     private bool isWandering;
+    private bool isRunningToDoor;
 
     private Rigidbody2D rb;
 
@@ -54,8 +55,10 @@ public class NPCMovement : MonoBehaviour
     {
         if ((GameObject)npcRunning == gameObject)
         {
+            ghost.layer = 0;
             isRunningAway = false;
             isInvestigating = false;
+            isRunningToDoor = true;
             NPCDestination.target = GameObject.Find("FrontDoor").transform;
         }
     }
@@ -73,18 +76,18 @@ public class NPCMovement : MonoBehaviour
     {
         while (true)
         {
-            if (isRunningAway)
+            if (isRunningAway && !isRunningToDoor)
             {
                 Debug.Log("Running");
                 UpdateRun();
             }
-            else if (isInvestigating)
+            else if (isInvestigating && !isRunningToDoor)
             {
                 Debug.Log("investigation");
 
                 UpdateInvestigate();
             }
-            else
+            else if(!isRunningToDoor)
             {
                 Debug.Log("wandering");
 

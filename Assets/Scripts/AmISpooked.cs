@@ -105,11 +105,12 @@ public class AmISpooked : MonoBehaviour
                 }
                 else
                 {
+                    isRunningToDoor = true;
                     runningAway = true;
                     EventManager.TriggerEvent(EventTypes.Runaway, gameObject);
                 }
             }
-            if (fear < 3 && runningAway && !isRunningToDoor)
+            if (fear < 3 && runningAway)
             {
                 runningAway = false;
                 EventManager.TriggerEvent(EventTypes.StopRunaway, gameObject);
@@ -123,13 +124,19 @@ public class AmISpooked : MonoBehaviour
             float volumeDistance = volume * inverseSquareDistance;
             if (volumeDistance < lowVolumeThreshold) // increase tenseness
             {
+                Debug.Log("VolumeDistance: " + volumeDistance);
+                Debug.Log("spookmeter: " + spookometer);
                 float tensenessIncrease = volumeDistance * spookometer * unconfidence;
                 tenseness += tensenessIncrease;
+                Debug.Log("Fear increase: " + tensenessIncrease);
             }
             else
             {
                 float fearIncrease = volumeDistance * spookometer * fragility * Mathf.Log(tenseness + 1);
                 fear += fearIncrease;
+                Debug.Log("VolumeDistance: " + volumeDistance);
+                Debug.Log("spookmeter: " + spookometer);
+                Debug.Log("Fear increase: " + fearIncrease);
             }
         }
     }
