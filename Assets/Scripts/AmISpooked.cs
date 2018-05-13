@@ -122,21 +122,18 @@ public class AmISpooked : MonoBehaviour
             timeOfLastSpook = Time.time;
             float inverseSquareDistance = 1f / (4 * Mathf.PI * (transform.position - ghost.transform.position).sqrMagnitude);
             float volumeDistance = volume * inverseSquareDistance;
+            Debug.Log("Volume distance: " + volumeDistance);
+            Debug.Log("Volume: " + volume);
+            Debug.Log("inverse " + inverseSquareDistance);
             if (volumeDistance < lowVolumeThreshold) // increase tenseness
             {
-                Debug.Log("VolumeDistance: " + volumeDistance);
-                Debug.Log("spookmeter: " + spookometer);
                 float tensenessIncrease = volumeDistance * spookometer * unconfidence;
                 tenseness += tensenessIncrease;
-                Debug.Log("Fear increase: " + tensenessIncrease);
             }
             else
             {
                 float fearIncrease = volumeDistance * spookometer * fragility * Mathf.Log(tenseness + 1);
                 fear += fearIncrease;
-                Debug.Log("VolumeDistance: " + volumeDistance);
-                Debug.Log("spookmeter: " + spookometer);
-                Debug.Log("Fear increase: " + fearIncrease);
             }
         }
     }

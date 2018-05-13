@@ -150,7 +150,7 @@ namespace Pathfinding {
 		 * \see #updatePosition
 		 */
 		[System.NonSerialized]
-		public bool updateRotation = true;
+		public bool updateRotation = false;
 
 		/** Indicates if gravity is used during this frame */
 		protected bool usingGravity { get; private set; }
