@@ -12,7 +12,8 @@ public enum EventTypes
     Spookometer,
     NewVolumeBounds,
     StopRunaway,
-    StopInvestigate
+    StopInvestigate,
+    UpdateScore
 }
 
 [System.Serializable]

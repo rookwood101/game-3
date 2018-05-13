@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224257651317037030}
   - component: {fileID: 222222996232118920}
   - component: {fileID: 114545411752796668}
-  - component: {fileID: 114781029092767756}
+  - component: {fileID: 114464226913473440}
   m_Layer: 5
   m_Name: Score
   m_TagString: Untagged
@@ -79,6 +79,17 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: SCORE
+--- !u!114 &114464226913473440
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1076052237642840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b190c8441047b814aa8b0f96c709cd25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114545411752796668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -111,18 +122,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0.1
---- !u!114 &114781029092767756
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1076052237642840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba8e72c9ab3714544af64e93866b18e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Text: 0
 --- !u!222 &222068475035108200
 CanvasRenderer:
   m_ObjectHideFlags: 1
