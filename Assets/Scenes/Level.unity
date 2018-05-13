@@ -1902,7 +1902,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4152095694998800, guid: b1b08605d52a324488eaf96e5885012c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 44.65
+      value: 44.47
       objectReference: {fileID: 0}
     - target: {fileID: 4152095694998800, guid: b1b08605d52a324488eaf96e5885012c, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1934,7 +1934,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4152095694998800, guid: b1b08605d52a324488eaf96e5885012c, type: 2}
       propertyPath: m_LocalScale.x
-      value: 2.9607844
+      value: 3.082046
       objectReference: {fileID: 0}
     - target: {fileID: 4152095694998800, guid: b1b08605d52a324488eaf96e5885012c, type: 2}
       propertyPath: m_LocalScale.y
@@ -9594,7 +9594,7 @@ MonoBehaviour:
   manualDebugFloorRoof: 0
   showSearchTree: 0
   unwalkableNodeDebugSize: 0.3
-  logPathResults: 1
+  logPathResults: 0
   maxNearestNodeDistance: 100
   scanOnStartup: 1
   fullGetNearestSearch: 0
@@ -10466,11 +10466,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4152095694998800, guid: b1b08605d52a324488eaf96e5885012c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 45.08
+      value: 44.96
       objectReference: {fileID: 0}
     - target: {fileID: 4152095694998800, guid: b1b08605d52a324488eaf96e5885012c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 8.29
+      value: 8.35
       objectReference: {fileID: 0}
     - target: {fileID: 4152095694998800, guid: b1b08605d52a324488eaf96e5885012c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -10498,11 +10498,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4152095694998800, guid: b1b08605d52a324488eaf96e5885012c, type: 2}
       propertyPath: m_LocalScale.x
-      value: 3.252324
+      value: 3.3331661
       objectReference: {fileID: 0}
     - target: {fileID: 4152095694998800, guid: b1b08605d52a324488eaf96e5885012c, type: 2}
       propertyPath: m_LocalScale.y
-      value: 7.5115733
+      value: 7.4711537
       objectReference: {fileID: 0}
     - target: {fileID: 1506565861690428, guid: b1b08605d52a324488eaf96e5885012c, type: 2}
       propertyPath: m_Name

@@ -78,19 +78,14 @@ public class NPCMovement : MonoBehaviour
         {
             if (isRunningAway && !isRunningToDoor)
             {
-                Debug.Log("Running");
                 UpdateRun();
             }
             else if (isInvestigating && !isRunningToDoor)
             {
-                Debug.Log("investigation");
-
                 UpdateInvestigate();
             }
             else if(!isRunningToDoor)
             {
-                Debug.Log("wandering");
-
                 await UpdateWandering();
             }
             await Wait.ForIEnumerator(null);
