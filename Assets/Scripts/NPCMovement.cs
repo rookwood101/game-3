@@ -62,7 +62,7 @@ public class NPCMovement : MonoBehaviour
         {
             if (isRunningAway)
             {
-                UpdateRun();
+                RunToDoor(gameObject);
             }
             else if (isNearGhost && isInvestigating)
             {

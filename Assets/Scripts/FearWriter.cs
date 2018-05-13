@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class FearWriter : MonoBehaviour
@@ -49,6 +50,13 @@ public class FearWriter : MonoBehaviour
             Destroy(fearSliderGO);
             Destroy(tensenessSliderGO);
             Destroy(gameObject);
+            Destroy(((GameObject)exitingNpc).GetComponent<NPCMovement>().target);
+
+            Scene currentScene = SceneManager.GetActiveScene();
+            if (currentScene.name == "Tutorial")
+            {
+                SceneManager.LoadScene(currentScene.buildIndex + 1);
+            }
         }
     }
 

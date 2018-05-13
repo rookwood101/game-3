@@ -18,7 +18,7 @@ public class NPCExit : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject touchingObject = collision.gameObject;
-
+        
         //Check if NPC is touching the door and npc is trying to leave
         if(touchingObject.tag == "NPC" && touchingObject.GetComponent<Pathfinding.AIDestinationSetter>().target == gameObject.transform)
         {
