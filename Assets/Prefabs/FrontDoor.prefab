@@ -57,7 +57,6 @@ GameObject:
   - component: {fileID: 4324640255709910}
   - component: {fileID: 212516080197265846}
   - component: {fileID: 61581316547673192}
-  - component: {fileID: 114802310999697132}
   - component: {fileID: 50842798896403128}
   m_Layer: 0
   m_Name: FrontDoor
@@ -219,17 +218,6 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1612293086569322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 925e2c0f3f3637643b38507f8540114d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114802310999697132
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1950999940692366}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 925e2c0f3f3637643b38507f8540114d, type: 3}

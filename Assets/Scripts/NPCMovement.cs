@@ -6,6 +6,7 @@ using UnityEngine;
 public class NPCMovement : MonoBehaviour
 {
 
+    public int secondsToWait;
     public LayerMask ghostLayer;
     public float ghostRadius;
     private GameObject ghost;
@@ -39,9 +40,9 @@ public class NPCMovement : MonoBehaviour
 
         EventManager.AddListener(EventTypes.Runaway, Runaway);
         EventManager.AddListener(EventTypes.Investigate, Investigate);
-        EventManager.AddListener(EventTypes.StopRunaway, RunToDoor);
+        //EventManager.AddListener(EventTypes.StopRunaway, RunToDoor);
         EventManager.AddListener(EventTypes.StopInvestigate, StopInvestigation);
-        EventManager.AddListener(EventTypes.RunToDoor, RunToDoor);
+        //EventManager.AddListener(EventTypes.RunToDoor, RunToDoor);
     }
 
     // Use this for initialization
@@ -51,16 +52,17 @@ public class NPCMovement : MonoBehaviour
 
     }
 
-    private void RunToDoor(object npcRunning)
+    private void RunToDoor()
     {
-        if ((GameObject)npcRunning == gameObject)
-        {
-            ghost.layer = 0;
-            isRunningAway = false;
-            isInvestigating = false;
-            isRunningToDoor = true;
-            NPCDestination.target = GameObject.Find("FrontDoor").transform;
-        }
+        //if ((GameObject)npcRunning == gameObject)
+        //{
+        isRunningAway = false;
+        isInvestigating = false;
+        isRunningToDoor = true;
+        NPCDestination.target = GameObject.Find("FrontDoor").transform;
+
+        gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        //}
     }
 
     private void StopInvestigation(object npcInvestigating)
@@ -78,7 +80,8 @@ public class NPCMovement : MonoBehaviour
         {
             if (isRunningAway && !isRunningToDoor)
             {
-                UpdateRun();
+                //UpdateRun();
+                RunToDoor();
             }
             else if (isInvestigating && !isRunningToDoor)
             {
@@ -97,6 +100,7 @@ public class NPCMovement : MonoBehaviour
         // If NPC reaches end of path and there is no new path set or start of game
         if (!NPCPath.pathPending && NPCPath.reachedEndOfPath || NPCDestination.target == null)
         {
+            gameObject.GetComponent<SpriteRenderer>().color = Color.white;
             // Pause
             NPCPath.canMove = false;
             NPCPath.maxSpeed = wanderSpeed;
@@ -107,8 +111,9 @@ public class NPCMovement : MonoBehaviour
             NPCDestination.target = target.transform;
 
             //After 7 seconds start following the path
-            await Wait.ForIEnumerator(new WaitForSeconds(7));
+            await Wait.ForIEnumerator(new WaitForSeconds(secondsToWait));
             NPCPath.canMove = true;
+
         }
 
     }
@@ -131,14 +136,6 @@ public class NPCMovement : MonoBehaviour
         NPCPath.maxSpeed = investigateSpeed;
         NPCPath.canMove = true;
 
-        NPCDestination.target = ghost.transform;
-    }
-
-    private void UpdateRun()
-    {
-        // Run fast away from ghost if speaking loudly
-        NPCPath.maxSpeed = runSpeed;
-        NPCPath.canMove = true;
         // Get direction to move away from ghost
         Vector3 direction = transform.position - ghost.transform.position;
         direction.z = 0;
@@ -150,14 +147,31 @@ public class NPCMovement : MonoBehaviour
         target.transform.position = transform.position + newDirection * 40;
 
         NPCDestination.target = target.transform;
+        gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
     }
+
+    //private void UpdateRun()
+    //{
+    //    // Run fast away from ghost if speaking loudly
+    //    NPCPath.maxSpeed = runSpeed;
+    //    NPCPath.canMove = true;
+    //    // Get direction to move away from ghost
+    //    Vector3 direction = transform.position - ghost.transform.position;
+    //    direction.z = 0;
+
+    //    Vector3 newDirection = direction.normalized;
+
+
+    //    //Change target for AI search
+    //    target.transform.position = transform.position + newDirection * 40;
+
+    //    NPCDestination.target = target.transform;
+    //}
 
     private void Runaway(object npc)
     {
         if ((GameObject)npc == gameObject)
         {
-            ghost.layer = 8;
-
             isRunningAway = true;
             isInvestigating = false;
         }

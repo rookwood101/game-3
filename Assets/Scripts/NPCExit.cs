@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class NPCExit : MonoBehaviour {
 
+    private bool exited;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -18,11 +20,12 @@ public class NPCExit : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject touchingObject = collision.gameObject;
-        
+
         //Check if NPC is touching the door and npc is trying to leave
-        if(touchingObject.tag == "NPC" && touchingObject.GetComponent<Pathfinding.AIDestinationSetter>().target == gameObject.transform)
+        if(touchingObject.name == "FrontDoor" && GetComponent<Pathfinding.AIDestinationSetter>().target == touchingObject.transform)
         {
-            EventManager.TriggerEvent(EventTypes.NPCExit, touchingObject);
+            EventManager.TriggerEvent(EventTypes.NPCExit, gameObject);
+
         }
     }
 }
