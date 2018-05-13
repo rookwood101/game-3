@@ -96,19 +96,9 @@ public class AmISpooked : MonoBehaviour
             }
             if (fear >= 1 && !runningAway && !isRunningToDoor)
             {
-                Scene currentScene = SceneManager.GetActiveScene();
-                if (currentScene.name == "Tutorial")
-                {
-                    Debug.Log("Running to door");
-                    isRunningToDoor = true;
-                    EventManager.TriggerEvent(EventTypes.RunToDoor, gameObject);
-                }
-                else
-                {
                     isRunningToDoor = true;
                     runningAway = true;
                     EventManager.TriggerEvent(EventTypes.Runaway, gameObject);
-                }
             }
             if (fear < 3 && runningAway)
             {

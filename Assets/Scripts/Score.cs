@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Score : MonoBehaviour {
 
@@ -30,7 +31,10 @@ public class Score : MonoBehaviour {
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        isInPerson = false;
+        if(other.gameObject.name == "FrontDoor" && SceneManager.GetActiveScene().name == "Tutorial 2")
+        {
+            SceneManager.LoadScene(2);
+        }
 
     }
 
