@@ -105,11 +105,12 @@ public class AmISpooked : MonoBehaviour
                 }
                 else
                 {
+                    isRunningToDoor = true;
                     runningAway = true;
                     EventManager.TriggerEvent(EventTypes.Runaway, gameObject);
                 }
             }
-            if (fear < 3 && runningAway && !isRunningToDoor)
+            if (fear < 3 && runningAway)
             {
                 runningAway = false;
                 EventManager.TriggerEvent(EventTypes.StopRunaway, gameObject);
@@ -121,6 +122,18 @@ public class AmISpooked : MonoBehaviour
             timeOfLastSpook = Time.time;
             float inverseSquareDistance = 1f / (4 * Mathf.PI * (transform.position - ghost.transform.position).sqrMagnitude);
             float volumeDistance = volume * inverseSquareDistance;
+            if(volumeDistance < lowVolumeThreshold)
+            {
+                Debug.Log("tense");
+            }
+            else
+            {
+                Debug.Log("scared");
+            }
+            Debug.Log("lowVolumeThreshold: " + lowVolumeThreshold);
+            Debug.Log("Volume distance: " + volumeDistance);
+            Debug.Log("Volume: " + volume);
+            Debug.Log("inverse " + inverseSquareDistance);
             if (volumeDistance < lowVolumeThreshold) // increase tenseness
             {
                 float tensenessIncrease = volumeDistance * spookometer * unconfidence;
