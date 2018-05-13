@@ -9,7 +9,7 @@ public class SliderText : MonoBehaviour
     private Slider slider;
     private void Awake()
     {
-        text = GetComponentInChildren<Text>();
+        text = transform.Find("Text").GetComponent<Text>();
         slider = GetComponent<Slider>();
     }
     private void LateUpdate()

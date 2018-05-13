@@ -28,9 +28,7 @@ public class NPCMovement : MonoBehaviour
     public int wanderSpeed;
 
 
-
-    // Use this for initialization
-    void Start()
+    private void Awake()
     {
         target = new GameObject("Target");
         rb = GetComponent<Rigidbody2D>();
@@ -41,14 +39,18 @@ public class NPCMovement : MonoBehaviour
         EventManager.AddListener(EventTypes.Runaway, Runaway);
         EventManager.AddListener(EventTypes.Investigate, Investigate);
         EventManager.AddListener(EventTypes.StopRunaway, RunToDoor);
+    }
 
+    // Use this for initialization
+    void Start()
+    {
         MovementHandling();
 
     }
 
     private void RunToDoor(object npcRunning)
     {
-        if((GameObject) npcRunning == gameObject)
+        if ((GameObject)npcRunning == gameObject)
         {
             isRunningAway = false;
             NPCDestination.target = GameObject.Find("FrontDoor").transform;
@@ -62,14 +64,19 @@ public class NPCMovement : MonoBehaviour
         {
             if (isRunningAway)
             {
-                RunToDoor(gameObject);
+                Debug.Log("Running");
+                UpdateRun();
             }
-            else if (isNearGhost && isInvestigating)
+            else if (isInvestigating)
             {
+                Debug.Log("investigation");
+
                 UpdateInvestigate();
             }
             else
             {
+                Debug.Log("wandering");
+
                 await UpdateWandering();
             }
             await Wait.ForIEnumerator(null);
@@ -89,7 +96,7 @@ public class NPCMovement : MonoBehaviour
             target.transform.position = PickRandomPoint();
 
             NPCDestination.target = target.transform;
-                
+
             //After 7 seconds start following the path
             await Wait.ForIEnumerator(new WaitForSeconds(7));
             NPCPath.canMove = true;

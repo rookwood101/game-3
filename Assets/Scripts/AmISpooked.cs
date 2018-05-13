@@ -14,6 +14,7 @@ public class AmISpooked : MonoBehaviour
     private float lowVolumeThreshold = 0.25f;
     private float lowDistanceThreshold = 10;
     private bool runningAway = false;
+    private bool investigating = false;
     private float timeOfLastSpook = 0;
 
     [HideInInspector]
@@ -71,9 +72,9 @@ public class AmISpooked : MonoBehaviour
                 {
                     tenseness = 0;
                 }
-                if (fear > 0.01f)
+                if (fear > 0.1f)
                 {
-                    fear -= 0.01f;
+                    fear -= 0.1f;
                 }
                 else
                 {
@@ -81,12 +82,24 @@ public class AmISpooked : MonoBehaviour
                 }
             }
 
-            if (fear >= 5 && !runningAway)
+            if (tenseness >= 0.1 && !runningAway && !investigating)
             {
+                investigating = true;
+                EventManager.TriggerEvent(EventTypes.Investigate, gameObject);
+            }
+            if (tenseness < 0.1 && !runningAway && investigating)
+            {
+                investigating = false;
+                EventManager.TriggerEvent(EventTypes.StopInvestigate, gameObject);
+            }
+            if (fear >= 3 && !runningAway)
+            {
+                runningAway = true;
                 EventManager.TriggerEvent(EventTypes.Runaway, gameObject);
             }
-            if (fear < 5 && runningAway)
+            if (fear < 3 && runningAway)
             {
+                runningAway = false;
                 EventManager.TriggerEvent(EventTypes.StopRunaway, gameObject);
             }
             if (spookometer < 1)

@@ -21,15 +21,18 @@ public class FearWriter : MonoBehaviour
         ghost = GameObject.Find("Ghost");
 
         amISpooked = GetComponent<AmISpooked>();
+
         fearSliderGO = Instantiate(fearSliderPrefab, GameObject.Find("Canvas").transform);
         FollowEntity2 fearFollowEntity = fearSliderGO.GetComponent<FollowEntity2>();
         fearFollowEntity.toTrack = gameObject;
         fearFollowEntity.offset = new Vector3(0, 2, 0);
+        fearSliderGO.transform.Find("Label").GetComponent<Text>().text = "FEAR";
 
         tensenessSliderGO = Instantiate(fearSliderPrefab, GameObject.Find("Canvas").transform);
         FollowEntity2 tenseFollowEntity = tensenessSliderGO.GetComponent<FollowEntity2>();
         tenseFollowEntity.toTrack = gameObject;
         tenseFollowEntity.offset = new Vector3(0, 3, 0);
+        tensenessSliderGO.transform.Find("Label").GetComponent<Text>().text = "TENSENESS";
 
         this.fearSlider = fearSliderGO.GetComponent<Slider>();
         this.tensenessSlider = tensenessSliderGO.GetComponent<Slider>();

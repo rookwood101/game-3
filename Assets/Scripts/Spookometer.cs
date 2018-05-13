@@ -32,7 +32,7 @@ public class Spookometer : MonoBehaviour
         }
         else
         {
-            text.color = Color.grey;
+            text.color = Color.white;
         }
     }
 

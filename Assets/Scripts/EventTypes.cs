@@ -11,7 +11,8 @@ public enum EventTypes
     NPCExit,
     Spookometer,
     NewVolumeBounds,
-    StopRunaway
+    StopRunaway,
+    StopInvestigate
 }
 
 [System.Serializable]
