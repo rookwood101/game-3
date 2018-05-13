@@ -78,7 +78,7 @@ public class AmISpooked : MonoBehaviour
                 fear = 0;
             }
 
-            if(tenseness > 2 && !runningAway)
+            if(tenseness > 0.02 && !runningAway)
             {
                 EventManager.TriggerEvent(EventTypes.Investigate, gameObject);
             }
