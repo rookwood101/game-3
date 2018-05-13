@@ -2,17 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour
+{
 
     public float speed;
+    private SpriteRenderer sr;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    void Start()
+    {
+        sr = GetComponentInChildren<SpriteRenderer>();
+    }
+
+    void Update()
+    {
+        if (Input.GetAxis("Horizontal") < 0)
+        {
+            sr.flipX = true;
+        }
+        else
+        {
+            sr.flipX = false;
+        }
         float x = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
         float y = Input.GetAxis("Vertical") * Time.deltaTime * speed;
 
