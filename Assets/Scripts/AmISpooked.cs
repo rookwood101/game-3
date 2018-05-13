@@ -94,7 +94,7 @@ public class AmISpooked : MonoBehaviour
                 investigating = false;
                 EventManager.TriggerEvent(EventTypes.StopInvestigate, gameObject);
             }
-            if (fear >= 3 && !runningAway && !isRunningToDoor)
+            if (fear >= 1.5 && !runningAway && !isRunningToDoor)
             {
                 Scene currentScene = SceneManager.GetActiveScene();
                 if (currentScene.name == "Tutorial")
