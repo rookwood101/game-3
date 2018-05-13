@@ -2358,7 +2358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NPCPrefab: {fileID: 1052972003118646, guid: 03b10e42483cb3d4cb448e324a5a77a2, type: 2}
-  spawnTime: 10000
+  spawnTime: 20
 --- !u!114 &343286354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12723,7 +12723,7 @@ Prefab:
     - target: {fileID: 114031643115027832, guid: 03b10e42483cb3d4cb448e324a5a77a2,
         type: 2}
       propertyPath: secondsToWait
-      value: 7
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 03b10e42483cb3d4cb448e324a5a77a2, type: 2}
