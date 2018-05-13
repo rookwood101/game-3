@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour
     private void OnSpookometer(object arg0)
     {
         float spookometer = (float)arg0;
-        ccm.Factor = Mathf.Max(0, spookometer - 1.3f);
+        ccm.Factor = Mathf.Max(0, (spookometer - 1f)*5);
     }
 
     // Update is called once per frame
