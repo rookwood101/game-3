@@ -123,6 +123,23 @@ GameObject:
   m_PrefabParentObject: {fileID: 1159160103172974, guid: 4784d74d36596a349812452631d49a7a,
     type: 2}
   m_PrefabInternal: {fileID: 1251533268}
+--- !u!95 &3805115
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 3805108}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 38f1588538f9b41888953d4314d32e56, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &7356987
 Prefab:
   m_ObjectHideFlags: 0
@@ -6851,6 +6868,42 @@ Prefab:
     - target: {fileID: 4458577438368616, guid: 4784d74d36596a349812452631d49a7a, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 50224417753635362, guid: 4784d74d36596a349812452631d49a7a,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 50224417753635362, guid: 4784d74d36596a349812452631d49a7a,
+        type: 2}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 50224417753635362, guid: 4784d74d36596a349812452631d49a7a,
+        type: 2}
+      propertyPath: m_UseFullKinematicContacts
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212549033845997356, guid: 4784d74d36596a349812452631d49a7a,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 66c3194b846544c1fa83429baff96b57,
+        type: 3}
+    - target: {fileID: 212549033845997356, guid: 4784d74d36596a349812452631d49a7a,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212549033845997356, guid: 4784d74d36596a349812452631d49a7a,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212549033845997356, guid: 4784d74d36596a349812452631d49a7a,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4784d74d36596a349812452631d49a7a, type: 2}
