@@ -6,22 +6,22 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public float speed;
-    private SpriteRenderer sr;
+    private Transform child;
 
-    void Start()
+    private void Awake()
     {
-        sr = GetComponentInChildren<SpriteRenderer>();
+        child = transform.Find("GhostSprite").transform;
     }
 
     void Update()
     {
         if (Input.GetAxis("Horizontal") < 0)
         {
-            sr.flipX = true;
+            child.localScale = new Vector3(-1, 1, 1);
         }
-        else
+        else if (Input.GetAxis("Horizontal") > 0)
         {
-            sr.flipX = false;
+            child.localScale = new Vector3(1, 1, 1);
         }
         float x = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
         float y = Input.GetAxis("Vertical") * Time.deltaTime * speed;
