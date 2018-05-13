@@ -6,6 +6,7 @@ using UnityEngine;
 public class NPCMovement : MonoBehaviour
 {
 
+    public int secondsToWait;
     public LayerMask ghostLayer;
     public float ghostRadius;
     private GameObject ghost;
@@ -55,7 +56,6 @@ public class NPCMovement : MonoBehaviour
     {
         if ((GameObject)npcRunning == gameObject)
         {
-            ghost.layer = 0;
             isRunningAway = false;
             isInvestigating = false;
             isRunningToDoor = true;
@@ -107,7 +107,7 @@ public class NPCMovement : MonoBehaviour
             NPCDestination.target = target.transform;
 
             //After 7 seconds start following the path
-            await Wait.ForIEnumerator(new WaitForSeconds(7));
+            await Wait.ForIEnumerator(new WaitForSeconds(secondsToWait));
             NPCPath.canMove = true;
         }
 
@@ -131,7 +131,17 @@ public class NPCMovement : MonoBehaviour
         NPCPath.maxSpeed = investigateSpeed;
         NPCPath.canMove = true;
 
-        NPCDestination.target = ghost.transform;
+        // Get direction to move away from ghost
+        Vector3 direction = transform.position - ghost.transform.position;
+        direction.z = 0;
+
+        Vector3 newDirection = direction.normalized;
+
+
+        //Change target for AI search
+        target.transform.position = transform.position + newDirection * 40;
+
+        NPCDestination.target = target.transform;
     }
 
     private void UpdateRun()
@@ -156,8 +166,6 @@ public class NPCMovement : MonoBehaviour
     {
         if ((GameObject)npc == gameObject)
         {
-            ghost.layer = 8;
-
             isRunningAway = true;
             isInvestigating = false;
         }
