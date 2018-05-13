@@ -124,15 +124,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6481ef62ffb368743a62eb26905943da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  secondsToWait: 6
   ghostLayer:
     serializedVersion: 2
     m_Bits: 256
   ghostRadius: 20
   target: {fileID: 0}
   wanderingRadius: 40
-  investigateSpeed: 5
+  investigateSpeed: 10
   runSpeed: 12
-  wanderSpeed: 7
+  wanderSpeed: 5
 --- !u!114 &114055223618852416
 MonoBehaviour:
   m_ObjectHideFlags: 1

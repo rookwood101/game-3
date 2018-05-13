@@ -7,18 +7,30 @@ public class SpawnNPCs : MonoBehaviour {
     public GameObject NPCPrefab;
 
     public float spawnTime;
+    public int maxNPCs;
     private float timeLeft;
     private int counter;
 
-	// Use this for initialization
-	void Start () {
+    private void Awake()
+    {
+        counter = 1;
+        EventManager.AddListener(EventTypes.NPCExit, DecrementCounter);
+    }
+
+    private void DecrementCounter(object _)
+    {
+        counter--;
+    }
+
+    // Use this for initialization
+    void Start () {
         timeLeft = spawnTime;
 	}
 	
 	// Update is called once per frame
 	void Update () {
         // Countdown
-        if(counter > 20)
+        if(counter > maxNPCs)
         {
             return;
         }

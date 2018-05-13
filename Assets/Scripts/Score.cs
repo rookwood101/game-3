@@ -28,23 +28,6 @@ public class Score : MonoBehaviour {
         EventManager.TriggerEvent(EventTypes.UpdateScore, score.ToString());
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (isInPerson)
-            return;
-
-        isInPerson = true;
-        if(collision.gameObject.tag == "NPC")
-        {
-            score--;
-            if (score < 0)
-            {
-                score = 0;
-            }
-            EventManager.TriggerEvent(EventTypes.UpdateScore, score.ToString());
-        }
-    }
-
     private void OnTriggerExit2D(Collider2D other)
     {
         isInPerson = false;
