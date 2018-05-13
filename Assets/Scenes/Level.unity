@@ -2433,8 +2433,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NPCPrefab: {fileID: 1052972003118646, guid: 03b10e42483cb3d4cb448e324a5a77a2, type: 2}
-  spawnTime: 5
-  maxNPCs: 5
+  UncleGhostPrefab: {fileID: 1278438970914810, guid: 3b8e39e1a05c16d408fd5d918454c985,
+    type: 2}
+  spawnTime: 20
+  maxNpcs: 10
+  npcsUntilUncleGhost: 5
 --- !u!114 &343286354
 MonoBehaviour:
   m_ObjectHideFlags: 0

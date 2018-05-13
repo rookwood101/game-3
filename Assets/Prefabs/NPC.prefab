@@ -131,8 +131,8 @@ MonoBehaviour:
   ghostRadius: 20
   target: {fileID: 0}
   wanderingRadius: 40
-  investigateSpeed: 10
-  runSpeed: 12
+  investigateSpeed: 11
+  runSpeed: 14
   wanderSpeed: 5
 --- !u!114 &114055223618852416
 MonoBehaviour:

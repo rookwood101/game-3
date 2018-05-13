@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UncleGhostMovement : MonoBehaviour {
 
@@ -25,6 +26,15 @@ public class UncleGhostMovement : MonoBehaviour {
         } else if (ai.velocity.x > 0)
         {
             transform.localScale = new Vector3(2, 2, 1);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject == naughtyBoy)
+        {
+            //TODO: Replace with GameOver Message
+            SceneManager.LoadScene(0);
         }
     }
 

@@ -5,20 +5,25 @@ using UnityEngine;
 public class SpawnNPCs : MonoBehaviour {
 
     public GameObject NPCPrefab;
+    public GameObject UncleGhostPrefab;
 
     public float spawnTime;
-    public int maxNPCs;
+    public int maxNpcs;
+    public int npcsUntilUncleGhost;
     private float timeLeft;
     private int counter;
+    private int numberOfNPCsScared;
 
     private void Awake()
     {
         counter = 1;
+        numberOfNPCsScared = 0;
         EventManager.AddListener(EventTypes.NPCExit, DecrementCounter);
     }
 
     private void DecrementCounter(object _)
     {
+        numberOfNPCsScared++;
         counter--;
     }
 
@@ -29,12 +34,17 @@ public class SpawnNPCs : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        // Countdown
-        if(counter > maxNPCs)
+        if(numberOfNPCsScared > npcsUntilUncleGhost)
+        {
+            Instantiate(UncleGhostPrefab, GameObject.Find("FrontDoor").transform.position - new Vector3(1, 0, 0), Quaternion.identity);
+            numberOfNPCsScared = 0;
+        }
+        // Limit number of NPCs
+        if(counter > maxNpcs)
         {
             return;
         }
-
+        // Countdown
         timeLeft -= Time.deltaTime;
         if(timeLeft < 0)
         {
