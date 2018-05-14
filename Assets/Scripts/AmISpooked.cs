@@ -94,7 +94,7 @@ public class AmISpooked : MonoBehaviour
                 investigating = false;
                 EventManager.TriggerEvent(EventTypes.StopInvestigate, gameObject);
             }
-            if (fear >= 1 && !runningAway && !isRunningToDoor)
+            if (fear >= 0.5 && !runningAway && tenseness >= 0.1 && !isRunningToDoor)
             {
                     isRunningToDoor = true;
                     runningAway = true;
@@ -119,7 +119,7 @@ public class AmISpooked : MonoBehaviour
                     float tensenessIncrease = volumeDistance * spookometer * unconfidence;
                     tenseness += tensenessIncrease;
                 }
-                else
+                else if(tenseness >= 0.1)
                 {
                     float fearIncrease = volumeDistance * spookometer * fragility * Mathf.Log(tenseness + 1);
                     fear += fearIncrease;
