@@ -38,7 +38,7 @@ public class Score : MonoBehaviour
         EventManager.TriggerEvent(EventTypes.UpdateScore, score.ToString());
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.name == "FrontDoor" && SceneManager.GetActiveScene().name == "Tutorial 2")
         {
