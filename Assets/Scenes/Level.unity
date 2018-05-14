@@ -10571,12 +10571,12 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1010020247}
-    - target: {fileID: 224597814779815702, guid: 884aebc56fe82f24c870a4f9aa556a39,
+    - target: {fileID: 224455845293505712, guid: 884aebc56fe82f24c870a4f9aa556a39,
         type: 2}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 224455845293505712, guid: 884aebc56fe82f24c870a4f9aa556a39,
+    - target: {fileID: 224597814779815702, guid: 884aebc56fe82f24c870a4f9aa556a39,
         type: 2}
       propertyPath: m_AnchorMax.y
       value: 0
