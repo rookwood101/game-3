@@ -55,7 +55,6 @@ public class NPCMovement : MonoBehaviour
     }
 
 
-
     // Use this for initialization
     void Start()
     {
