@@ -23,6 +23,8 @@ public class NPCMovement : MonoBehaviour
     private bool isInvestigating;
     private bool isWandering;
     private bool isRunningToDoor;
+    private bool playedYellowSound;
+    private bool playedRedSound;
 
     private Rigidbody2D rb;
 
@@ -30,6 +32,7 @@ public class NPCMovement : MonoBehaviour
     public int runSpeed;
     public int wanderSpeed;
 
+    private AudioSource[] shouts;
 
     private void Awake()
     {
@@ -38,6 +41,8 @@ public class NPCMovement : MonoBehaviour
         NPCPath = GetComponent<Pathfinding.AIPath>();
         NPCDestination = GetComponent<Pathfinding.AIDestinationSetter>();
         ghost = GameObject.Find("Ghost");
+
+        shouts = GetComponents<AudioSource>();
 
         EventManager.AddListener(EventTypes.Runaway, Runaway);
         EventManager.AddListener(EventTypes.Investigate, Investigate);
@@ -81,15 +86,26 @@ public class NPCMovement : MonoBehaviour
         {
             if (isRunningAway && !isRunningToDoor)
             {
-                //UpdateRun();
+                if (!playedRedSound)
+                {
+                    playedRedSound = true;
+                    shouts[1].Play();
+                }
                 RunToDoor();
             }
             else if (isInvestigating && !isRunningToDoor)
             {
+                if (!playedYellowSound)
+                {
+                    playedYellowSound = true;
+                    shouts[0].Play();
+                }
                 UpdateInvestigate();
             }
             else if(!isRunningToDoor)
             {
+                playedYellowSound = false;
+                playedRedSound = false;
                 await UpdateWandering();
             }
             await Wait.ForIEnumerator(null);
@@ -133,6 +149,7 @@ public class NPCMovement : MonoBehaviour
 
     private void UpdateInvestigate()
     {
+
         // Move slowly towards ghost if speaking quietly
         NPCPath.maxSpeed = investigateSpeed;
         NPCPath.canMove = true;
