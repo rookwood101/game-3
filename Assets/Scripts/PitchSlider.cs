@@ -20,7 +20,7 @@ public class PitchSlider : MonoBehaviour
     {
         slider = GetComponent<Slider>();
         sliderColorBlock = slider.colors;
-        valueText = GameObject.Find("Slider Value").GetComponent<Text>();
+        valueText = transform.Find("Slider Value").GetComponent<Text>();
         EventManager.AddListener(EventTypes.MicrophonePitch, OnPitchChange);
     }
 

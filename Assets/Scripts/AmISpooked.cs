@@ -12,8 +12,10 @@ public class AmISpooked : MonoBehaviour
     private GameObject ghost;// inverse square law - spooked less if ghost further away
     private float volumeTotal = 0;
     private uint volumeSamples = 0;
-    private const float lowDistanceThreshold = 10;
-    private float lowVolumeThreshold = 0.25f * (1f / (4 * Mathf.PI * lowDistanceThreshold * lowDistanceThreshold));
+    private const float LOW_DISTANCE_THRESHOLD = 5;
+    public const float TENSENESS_THRESHOLD = 0.1f;
+    public const float FEAR_THRESHOLD = 1f;
+    private float lowVolumeThreshold = 0.25f * (1f / (4 * Mathf.PI * LOW_DISTANCE_THRESHOLD * LOW_DISTANCE_THRESHOLD));
     private bool runningAway = false;
     private bool investigating = false;
     private bool isRunningToDoor = false;
@@ -26,6 +28,7 @@ public class AmISpooked : MonoBehaviour
     [HideInInspector]
     public float fear = 0; // how scared they are right now - loud spookiness brings this up * by tenseness
     private float fragility = 100;// Their general indifference - affects how fearful they get
+    public bool dead = false;
 
     private void Awake()
     {
@@ -44,7 +47,7 @@ public class AmISpooked : MonoBehaviour
     {
         float[] volumeBounds = (float[])volumeBoundsObj;
         float midPoint = (volumeBounds[0] + volumeBounds[1]) / 2f;
-        lowVolumeThreshold = ((volumeBounds[0] + midPoint) / 2f) * (1f / (4 * Mathf.PI * lowDistanceThreshold * lowDistanceThreshold));
+        lowVolumeThreshold = ((volumeBounds[0] + midPoint) / 2f) * (1f / (4 * Mathf.PI * LOW_DISTANCE_THRESHOLD * LOW_DISTANCE_THRESHOLD));
     }
 
     private async Task UpdateFancy()
@@ -56,6 +59,7 @@ public class AmISpooked : MonoBehaviour
             {
                 continue;
             }
+
             float spookometer = spookometerTotal / spookometerSamples;
             spookometerTotal = 0;
             spookometerSamples = 0;
@@ -63,67 +67,83 @@ public class AmISpooked : MonoBehaviour
             volumeTotal = 0;
             volumeSamples = 0;
 
-            // decay
-            if (Time.time - timeOfLastSpook > 1)
-            {
-                if (tenseness > 0.01f)
-                {
-                    tenseness -= 0.01f;
-                }
-                else
-                {
-                    tenseness = 0;
-                }
-                if (fear > 0.1f)
-                {
-                    fear -= 0.1f;
-                }
-                else
-                {
-                    fear = 0;
-                }
-            }
+            DoDecay();
 
-            if (tenseness >= 0.1 && !runningAway && !investigating && !isRunningToDoor)
-            {
-                investigating = true;
-                EventManager.TriggerEvent(EventTypes.Investigate, gameObject);
-            }
-            if (tenseness < 0.1 && !runningAway && investigating && !isRunningToDoor)
-            {
-                investigating = false;
-                EventManager.TriggerEvent(EventTypes.StopInvestigate, gameObject);
-            }
-            if (fear >= 0.5 && !runningAway && tenseness >= 0.1 && !isRunningToDoor)
-            {
-                    isRunningToDoor = true;
-                    runningAway = true;
-                    EventManager.TriggerEvent(EventTypes.Runaway, gameObject);
-            }
-            if (fear < 3 && runningAway)
-            {
-                runningAway = false;
-                EventManager.TriggerEvent(EventTypes.StopRunaway, gameObject);
-            }
+            CheckIfSpooked();
+
+            // can't be spooked if spookometer < 1
             if (spookometer < 1)
             {
                 continue;
             }
-            float inverseSquareDistance = 1f / (4 * Mathf.PI * (transform.position - ghost.transform.position).sqrMagnitude);
-            float volumeDistance = volume * inverseSquareDistance;
-            if ((transform.position - ghost.transform.position).magnitude < 15)
+            DoSpooking(spookometer, volume);
+        }
+    }
+
+    private void DoSpooking(float spookometer, float volume)
+    {
+        float inverseSquareDistance = 1f / (4 * Mathf.PI * (transform.position - ghost.transform.position).sqrMagnitude);
+        float volumeDistance = volume * inverseSquareDistance;
+        if ((transform.position - ghost.transform.position).magnitude < 15)
+        {
+            timeOfLastSpook = Time.time;
+            if (volumeDistance < lowVolumeThreshold) // increase tenseness
             {
-                timeOfLastSpook = Time.time;
-                if (volumeDistance < lowVolumeThreshold) // increase tenseness
-                {
-                    float tensenessIncrease = volumeDistance * spookometer * unconfidence;
-                    tenseness += tensenessIncrease;
-                }
-                else if(tenseness >= 0.1)
-                {
-                    float fearIncrease = volumeDistance * spookometer * fragility * Mathf.Log(tenseness + 1);
-                    fear += fearIncrease;
-                }
+                float tensenessIncrease = volumeDistance * spookometer * unconfidence;
+                tenseness += tensenessIncrease;
+            }
+            else
+            {
+                float fearIncrease = volumeDistance * spookometer * fragility;
+                fear += fearIncrease;
+            }
+        }
+    }
+
+    private void CheckIfSpooked()
+    {
+        if (tenseness >= TENSENESS_THRESHOLD && !runningAway && !investigating && !isRunningToDoor && !dead)
+        {
+            investigating = true;
+            EventManager.TriggerEvent(EventTypes.RunawayAnywhere, gameObject);
+        }
+        if (tenseness < TENSENESS_THRESHOLD && !runningAway && investigating && !isRunningToDoor && !dead)
+        {
+            investigating = false;
+            EventManager.TriggerEvent(EventTypes.StopRunawayAnywhere, gameObject);
+        }
+        if (fear >= FEAR_THRESHOLD && !runningAway && tenseness >= TENSENESS_THRESHOLD && !isRunningToDoor && !dead)
+        {
+            isRunningToDoor = true;
+            runningAway = true;
+            EventManager.TriggerEvent(EventTypes.RunawayToDoorNew, gameObject);
+        }
+        if (fear >= FEAR_THRESHOLD && tenseness < TENSENESS_THRESHOLD && !runningAway && !isRunningToDoor && !investigating && !dead)
+        {
+            dead = true;
+            EventManager.TriggerEvent(EventTypes.Dead, gameObject);
+        }
+    }
+
+    private void DoDecay()
+    {
+        if (Time.time - timeOfLastSpook > 3)
+        {
+            if (tenseness > 0.01f)
+            {
+                tenseness -= 0.01f;
+            }
+            else
+            {
+                tenseness = 0;
+            }
+            if (fear > 0.1f)
+            {
+                fear -= 0.1f;
+            }
+            else
+            {
+                fear = 0;
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -25,6 +26,7 @@ public class NPCMovement : MonoBehaviour
     private bool isRunningToDoor;
     private bool playedYellowSound;
     private bool playedRedSound;
+    private bool isDead = false;
 
     private Rigidbody2D rb;
 
@@ -44,12 +46,15 @@ public class NPCMovement : MonoBehaviour
 
         shouts = GetComponents<AudioSource>();
 
-        EventManager.AddListener(EventTypes.Runaway, Runaway);
-        EventManager.AddListener(EventTypes.Investigate, Investigate);
+        EventManager.AddListener(EventTypes.RunawayToDoorNew, Runaway);
+        EventManager.AddListener(EventTypes.RunawayAnywhere, Investigate);
         //EventManager.AddListener(EventTypes.StopRunaway, RunToDoor);
-        EventManager.AddListener(EventTypes.StopInvestigate, StopInvestigation);
+        EventManager.AddListener(EventTypes.StopRunawayAnywhere, StopInvestigation);
         //EventManager.AddListener(EventTypes.RunToDoor, RunToDoor);
+        EventManager.AddListener(EventTypes.Dead, OnDeath);
     }
+
+
 
     // Use this for initialization
     void Start()
@@ -71,6 +76,16 @@ public class NPCMovement : MonoBehaviour
         //}
     }
 
+    private void OnDeath(object npcDead)
+    {
+        if ((GameObject)npcDead == gameObject)
+        {
+            isDead = true;
+            NPCPath.canMove = false;
+            shouts[2].Play();
+        }
+    }
+
     private void StopInvestigation(object npcInvestigating)
     {
         if ((GameObject)npcInvestigating == gameObject)
@@ -82,7 +97,7 @@ public class NPCMovement : MonoBehaviour
     // Update is called once per frame
     private async Task MovementHandling()
     {
-        while (true)
+        while (!isDead)
         {
             if (isRunningAway && !isRunningToDoor)
             {
@@ -102,7 +117,7 @@ public class NPCMovement : MonoBehaviour
                 }
                 UpdateInvestigate();
             }
-            else if(!isRunningToDoor)
+            else if (!isRunningToDoor)
             {
                 playedYellowSound = false;
                 playedRedSound = false;
@@ -138,7 +153,7 @@ public class NPCMovement : MonoBehaviour
     private Vector2 PickRandomPoint()
     {
         // Pick a random point in an area
-        Vector3 point = Random.insideUnitCircle * wanderingRadius;
+        Vector3 point = UnityEngine.Random.insideUnitCircle * wanderingRadius;
         point.z = 0;
 
         // Set are to around NPC
