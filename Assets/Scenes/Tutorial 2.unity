@@ -573,7 +573,7 @@ GameObject:
   - component: {fileID: 214089086}
   - component: {fileID: 214089085}
   m_Layer: 0
-  m_Name: New Text
+  m_Name: top text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -586,7 +586,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 214089084}
-  m_Text: You've been scarring illegally again haven't you?!
+  m_Text: You've been scaring illegally again haven't you?!
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -641,7 +641,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 214089084}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.85, y: -14.33, z: -5}
+  m_LocalPosition: {x: 14.7, y: -26.4, z: -5}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1589,7 +1589,7 @@ GameObject:
   - component: {fileID: 602405198}
   - component: {fileID: 602405197}
   m_Layer: 0
-  m_Name: New Text (2)
+  m_Name: bottom text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1602,7 +1602,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 602405196}
-  m_Text: ' (Don''t get caught!)'
+  m_Text: ' (Don''t get caught by uncles)'
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -1657,7 +1657,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 602405196}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.5, y: -25.1, z: -5}
+  m_LocalPosition: {x: 22.5, y: -15.3, z: -5}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5120,7 +5120,7 @@ GameObject:
   - component: {fileID: 1733453710}
   - component: {fileID: 1733453709}
   m_Layer: 0
-  m_Name: New Text (1)
+  m_Name: middle text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5190,7 +5190,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1733453708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.4, y: -20.9, z: -5}
+  m_LocalPosition: {x: 22.1, y: -20.4, z: -5}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
