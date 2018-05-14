@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NPCMovement : MonoBehaviour
 {
@@ -98,7 +99,7 @@ public class NPCMovement : MonoBehaviour
     private async Task UpdateWandering()
     {
         // If NPC reaches end of path and there is no new path set or start of game
-        if (!NPCPath.pathPending && NPCPath.reachedEndOfPath || NPCDestination.target == null)
+        if ((!NPCPath.pathPending && NPCPath.reachedEndOfPath || NPCDestination.target == null) && SceneManager.GetActiveScene().name != "Tutorial")
         {
             gameObject.GetComponent<SpriteRenderer>().color = Color.white;
             // Pause
@@ -149,24 +150,6 @@ public class NPCMovement : MonoBehaviour
         NPCDestination.target = target.transform;
         gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
     }
-
-    //private void UpdateRun()
-    //{
-    //    // Run fast away from ghost if speaking loudly
-    //    NPCPath.maxSpeed = runSpeed;
-    //    NPCPath.canMove = true;
-    //    // Get direction to move away from ghost
-    //    Vector3 direction = transform.position - ghost.transform.position;
-    //    direction.z = 0;
-
-    //    Vector3 newDirection = direction.normalized;
-
-
-    //    //Change target for AI search
-    //    target.transform.position = transform.position + newDirection * 40;
-
-    //    NPCDestination.target = target.transform;
-    //}
 
     private void Runaway(object npc)
     {
