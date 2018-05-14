@@ -6897,7 +6897,11 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1123216388}
-  m_Text: Get Scaring !
+  m_Text: 'scare the nuns.
+
+    don''t get caught.
+
+    try not to kill them.'
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -6952,7 +6956,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1123216388}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.9, y: -14.9, z: -5}
+  m_LocalPosition: {x: 5, y: -13.7, z: -5}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -10571,12 +10575,12 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1010020247}
-    - target: {fileID: 224597814779815702, guid: 884aebc56fe82f24c870a4f9aa556a39,
+    - target: {fileID: 224455845293505712, guid: 884aebc56fe82f24c870a4f9aa556a39,
         type: 2}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 224455845293505712, guid: 884aebc56fe82f24c870a4f9aa556a39,
+    - target: {fileID: 224597814779815702, guid: 884aebc56fe82f24c870a4f9aa556a39,
         type: 2}
       propertyPath: m_AnchorMax.y
       value: 0

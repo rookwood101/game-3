@@ -36,6 +36,7 @@ public class AmISpooked : MonoBehaviour
         EventManager.AddListener(EventTypes.Spookometer, OnSpookometerChange);
         EventManager.AddListener(EventTypes.MicrophoneVolume, OnMicrophoneVolumeChange);
         EventManager.AddListener(EventTypes.NewVolumeBounds, OnVolumeBounds);
+        // lowVolumeThreshold = ((VolumeSlider.sliderMin + ((VolumeSlider.sliderMin + VolumeSlider.sliderMax) / 2f)) / 2f) * (1f / (4 * Mathf.PI * LOW_DISTANCE_THRESHOLD * LOW_DISTANCE_THRESHOLD));
     }
 
     private void Start()
