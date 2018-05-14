@@ -33,8 +33,14 @@ public class UncleGhostMovement : MonoBehaviour {
     {
         if(collision.gameObject == naughtyBoy)
         {
-            //TODO: Replace with GameOver Message
-            SceneManager.LoadScene(2);
+            if (SceneManager.GetActiveScene().name == "Tutorial 2")
+            {
+                SceneManager.LoadScene(1);
+            }
+            else
+            {
+                SceneManager.LoadScene(2);
+            }
         }
     }
 
