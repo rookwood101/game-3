@@ -71,7 +71,6 @@ public class NPCMovement : MonoBehaviour
         isRunningToDoor = true;
         NPCDestination.target = GameObject.Find("FrontDoor").transform;
 
-        gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         //}
     }
 
@@ -100,26 +99,17 @@ public class NPCMovement : MonoBehaviour
         {
             if (isRunningAway && !isRunningToDoor)
             {
-                if (!playedRedSound)
-                {
-                    playedRedSound = true;
-                    shouts[1].Play();
-                }
                 RunToDoor();
             }
             else if (isInvestigating && !isRunningToDoor)
             {
-                if (!playedYellowSound)
-                {
-                    playedYellowSound = true;
-                    shouts[0].Play();
-                }
                 UpdateInvestigate();
             }
             else if (!isRunningToDoor)
             {
                 playedYellowSound = false;
                 playedRedSound = false;
+                gameObject.GetComponent<SpriteRenderer>().color = Color.white;
                 await UpdateWandering();
             }
             await Wait.ForIEnumerator(null);
@@ -131,7 +121,6 @@ public class NPCMovement : MonoBehaviour
         // If NPC reaches end of path and there is no new path set or start of game
         if ((!NPCPath.pathPending && NPCPath.reachedEndOfPath || NPCDestination.target == null) && SceneManager.GetActiveScene().name != "Tutorial")
         {
-            gameObject.GetComponent<SpriteRenderer>().color = Color.white;
             // Pause
             NPCPath.canMove = false;
             NPCPath.maxSpeed = wanderSpeed;
@@ -141,7 +130,7 @@ public class NPCMovement : MonoBehaviour
 
             NPCDestination.target = target.transform;
 
-            //After 7 seconds start following the path
+            //After x seconds start following the path
             await Wait.ForIEnumerator(new WaitForSeconds(secondsToWait));
             NPCPath.canMove = true;
 
@@ -179,7 +168,6 @@ public class NPCMovement : MonoBehaviour
         target.transform.position = transform.position + newDirection * 40;
 
         NPCDestination.target = target.transform;
-        gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
     }
 
     private void Runaway(object npc)
@@ -188,6 +176,14 @@ public class NPCMovement : MonoBehaviour
         {
             isRunningAway = true;
             isInvestigating = false;
+
+            if (!playedRedSound)
+            {
+                playedRedSound = true;
+                shouts[1].Play();
+            }
+
+            gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         }
     }
 
@@ -196,7 +192,16 @@ public class NPCMovement : MonoBehaviour
         if ((GameObject)npc == gameObject)
         {
             if (!isRunningAway)
+            {
                 isInvestigating = true;
+
+                if (!playedYellowSound)
+                {
+                    playedYellowSound = true;
+                    shouts[0].Play();
+                }
+                gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
+            }
         }
     }
 }

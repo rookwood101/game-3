@@ -18,6 +18,6 @@ public class TutorialManager : MonoBehaviour {
     private async void FailLevel(object _)
     {
         await Wait.ForIEnumerator(new WaitForSeconds(2));
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Tutorial");
     }
 }

@@ -42,7 +42,7 @@ public class Score : MonoBehaviour
     {
         if (other.gameObject.name == "FrontDoor" && SceneManager.GetActiveScene().name == "Tutorial 2")
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene("Level");
         }
 
     }

@@ -35,11 +35,11 @@ public class UncleGhostMovement : MonoBehaviour {
         {
             if (SceneManager.GetActiveScene().name == "Tutorial 2")
             {
-                SceneManager.LoadScene(1);
+                SceneManager.LoadScene("Tutorial 2");
             }
             else
             {
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene("Level");
             }
         }
     }

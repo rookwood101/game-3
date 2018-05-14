@@ -941,40 +941,6 @@ Prefab:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 223719013925365980, guid: 884aebc56fe82f24c870a4f9aa556a39,
-        type: 2}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 1010020247}
-    - target: {fileID: 0}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224455845293505712, guid: 884aebc56fe82f24c870a4f9aa556a39,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 224597814779815702, guid: 884aebc56fe82f24c870a4f9aa556a39,
         type: 2}
       propertyPath: m_AnchorMax.y
@@ -982,7 +948,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 224455845293505712, guid: 884aebc56fe82f24c870a4f9aa556a39,
         type: 2}
-      propertyPath: m_SizeDelta.x
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1525,7 +1491,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4152095694998800, guid: b1b08605d52a324488eaf96e5885012c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.9000015
+      value: 2.011
       objectReference: {fileID: 0}
     - target: {fileID: 4152095694998800, guid: b1b08605d52a324488eaf96e5885012c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1553,7 +1519,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4152095694998800, guid: b1b08605d52a324488eaf96e5885012c, type: 2}
       propertyPath: m_LocalScale.y
-      value: 4.9548097
+      value: 5.010204
       objectReference: {fileID: 0}
     - target: {fileID: 4152095694998800, guid: b1b08605d52a324488eaf96e5885012c, type: 2}
       propertyPath: m_LocalScale.x
@@ -13846,7 +13812,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4152095694998800, guid: b1b08605d52a324488eaf96e5885012c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 21.89
+      value: 21.919
       objectReference: {fileID: 0}
     - target: {fileID: 4152095694998800, guid: b1b08605d52a324488eaf96e5885012c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -13894,6 +13860,11 @@ Prefab:
         type: 2}
       propertyPath: m_DrawMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212509409376220214, guid: b1b08605d52a324488eaf96e5885012c,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 2.9494684
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1b08605d52a324488eaf96e5885012c, type: 2}
@@ -14662,7 +14633,9 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1827200277}
-  m_Text: 'Build up to the scare, they are fragile '
+  m_Text: 'Build up to the scare.
+
+    Beware, they are fragile!'
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -15443,7 +15416,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4152095694998800, guid: b1b08605d52a324488eaf96e5885012c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 21.858479
+      value: 21.884
       objectReference: {fileID: 0}
     - target: {fileID: 4152095694998800, guid: b1b08605d52a324488eaf96e5885012c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -15491,6 +15464,11 @@ Prefab:
         type: 2}
       propertyPath: m_DrawMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212509409376220214, guid: b1b08605d52a324488eaf96e5885012c,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 2.9487698
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1b08605d52a324488eaf96e5885012c, type: 2}
