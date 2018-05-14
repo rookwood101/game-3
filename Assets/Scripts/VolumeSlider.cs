@@ -16,11 +16,11 @@ public class VolumeSlider : MonoBehaviour
     private void Awake()
     {
         slider = GetComponent<Slider>();
-        setMin = GameObject.Find("Set Min Vol").GetComponent<Button>();
+        setMin = transform.Find("Set Min Vol").GetComponent<Button>();
         setMin.onClick.AddListener(new UnityAction(OnSetMin));
-        setMax = GameObject.Find("Set Max Vol").GetComponent<Button>();
+        setMax = transform.Find("Set Max Vol").GetComponent<Button>();
         setMax.onClick.AddListener(new UnityAction(OnSetMax));
-        valueText = GameObject.Find("Slider Value Vol").GetComponent<Text>();
+        valueText = transform.Find("Slider Value Vol").GetComponent<Text>();
         EventManager.AddListener(EventTypes.MicrophoneVolume, OnVolumeChange);
     }
 

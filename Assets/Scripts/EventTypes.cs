@@ -6,15 +6,16 @@ public enum EventTypes
     MicrophoneVolume,
     MicrophonePitch,
     NewPitchBounds,
-    Runaway,
-    Investigate,
+    RunawayToDoorNew,
+    RunawayAnywhere,
     NPCExit,
     Spookometer,
     NewVolumeBounds,
     StopRunaway,
-    StopInvestigate,
+    StopRunawayAnywhere,
     UpdateScore,
-    RunToDoor
+    RunToDoor,
+    Dead
 }
 
 [System.Serializable]
