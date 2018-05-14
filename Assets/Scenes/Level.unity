@@ -6897,11 +6897,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1123216388}
-  m_Text: 'scare the nuns.
-
-    don''t get caught.
-
-    try not to kill them.'
+  m_Text: Start scaring!
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
