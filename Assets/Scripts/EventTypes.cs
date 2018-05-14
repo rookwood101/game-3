@@ -15,7 +15,8 @@ public enum EventTypes
     StopRunawayAnywhere,
     UpdateScore,
     RunToDoor,
-    Dead
+    Dead,
+    Start
 }
 
 [System.Serializable]
