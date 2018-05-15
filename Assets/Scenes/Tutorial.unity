@@ -997,9 +997,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 92028214}
-  m_Text: 'Fear without tension may have side effects-
-
-    Beware, they are fragile!'
+  m_Text: Fear without tension may cause permanent death!
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -1603,7 +1601,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 190154431}
-  m_Text: "Vary your pitch.\nThe spookometer will tell \nyou how spooky you are"
+  m_Text: "Vary your pitch.\nThe spookometer will tell \nyou how spooky you are!"
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
