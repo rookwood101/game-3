@@ -63,7 +63,7 @@ public class Spookometer : MonoBehaviour
 
             byte[] compressedSamples = CLZF2.Compress(pitchRecentSamplesBytes);
             compressionRatio = (float)compressedSamples.Length / (float)pitchSampleCount;
-            text.text = compressionRatio.ToString();
+            text.text = compressionRatio.ToString("0.00");
 
             EventManager.TriggerEvent(EventTypes.Spookometer, compressionRatio);
         }
